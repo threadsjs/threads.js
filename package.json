@@ -1,0 +1,15 @@
+{
+  "name": "threads.js",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "undici": "^5.22.1"
+  },
+  "type": "module"
+}
