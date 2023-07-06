@@ -25,3 +25,20 @@ export async function getUser(userId) {
 		return await res.json()
 	})
 }
+
+export async function getPost(postId) {
+	const lsd = await getLsd()
+	return await fetch("https://www.threads.net/api/graphql", {
+    "credentials": "omit",
+    "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-IG-App-ID": "238260118697367",
+        "X-FB-LSD": lsd,
+        "Sec-Fetch-Site": "same-origin",
+    },
+    "body": `lsd=${lsd}&variables={"postId":"${userId}"}&doc_id=5587632691339264`,
+    "method": "POST",
+	}).then(async res => {
+		return await res.json()
+	})
+}
