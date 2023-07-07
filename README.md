@@ -8,9 +8,11 @@ npm install @threadsjs/threads.js
 
 # Example usage
 ```js
-import { getPost } from '@threadjs/threads.js';
+import { getToken, getPost } from '@threadjs/threads.js';
 
-await getPost('3141055616164096839').then(post => {
-  console.log(post)
-});
+await getToken('username', 'password').then(async token => {
+	await getUser('25025320', token).then(user => {
+		console.log(user)
+	})
+})
 ```
