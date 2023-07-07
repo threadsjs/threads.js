@@ -36,7 +36,7 @@ export async function getPost(postId) {
         "X-FB-LSD": lsd,
         "Sec-Fetch-Site": "same-origin",
     },
-    "body": `lsd=${lsd}&variables={"postId":"${userId}"}&doc_id=5587632691339264`,
+    "body": `lsd=${lsd}&variables={"postID":"${postId}"}&doc_id=5587632691339264`,
     "method": "POST",
 	}).then(async res => {
 		return await res.json()
