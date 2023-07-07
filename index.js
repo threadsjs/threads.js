@@ -1,5 +1,23 @@
 import { fetch } from 'undici';
 
+async function getToken(username, password) {
+	const id = (Math.random()*1e24).toString(36)
+	return await fetch("https://i.instagram.com/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/",{
+		method: "POST",
+		headers: {
+			"User-Agent": "Barcelona 289.0.0.77.109 Android",
+			"Sec-Fetch-Site": "same-origin",
+			"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+		},
+		body: `params={"client_input_params":{"password":"${password}","contact_point":"${username}","device_id":"android-${id}"},"server_params":{"credential_type":"password","device_id":"android-${id}"}}&bk_client_context={"bloks_version":"5f56efad68e1edec7801f630b5c122704ec5378adbee6609a448f105f34a9c73","styles_id":"instagram"}&bloks_versioning_id=5f56efad68e1edec7801f630b5c122704ec5378adbee6609a448f105f34a9c73`
+	}).then(async res => {
+		const text = await res.text();
+		const pos = text.search("Bearer IGT:2:");
+		const token = text.substring(pos + 13, pos + 173)
+		console.log(token);
+	});
+}
+
 async function getLsd() {
 	return await fetch("https://www.threads.net/@instagram").then(async res => {
 		const text = await res.text();
@@ -12,15 +30,15 @@ async function getLsd() {
 export async function getUser(userId) {
 	const lsd = await getLsd()
 	return await fetch("https://www.threads.net/api/graphql", {
-    "credentials": "omit",
-    "headers": {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "X-IG-App-ID": "238260118697367",
-        "X-FB-LSD": lsd,
-        "Sec-Fetch-Site": "same-origin",
-    },
-    "body": `lsd=${lsd}&variables={"userID":"${userId}"}&doc_id=23996318473300828`,
-    "method": "POST",
+	"credentials": "omit",
+	"headers": {
+		"Content-Type": "application/x-www-form-urlencoded",
+		"X-IG-App-ID": "238260118697367",
+		"X-FB-LSD": lsd,
+		"Sec-Fetch-Site": "same-origin",
+	},
+	"body": `lsd=${lsd}&variables={"userID":"${userId}"}&doc_id=23996318473300828`,
+	"method": "POST",
 	}).then(async res => {
 		return await res.json()
 	})
@@ -29,15 +47,15 @@ export async function getUser(userId) {
 export async function getPost(postId) {
 	const lsd = await getLsd()
 	return await fetch("https://www.threads.net/api/graphql", {
-    "credentials": "omit",
-    "headers": {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "X-IG-App-ID": "238260118697367",
-        "X-FB-LSD": lsd,
-        "Sec-Fetch-Site": "same-origin",
-    },
-    "body": `lsd=${lsd}&variables={"postID":"${postId}"}&doc_id=5587632691339264`,
-    "method": "POST",
+	"credentials": "omit",
+	"headers": {
+		"Content-Type": "application/x-www-form-urlencoded",
+		"X-IG-App-ID": "238260118697367",
+		"X-FB-LSD": lsd,
+		"Sec-Fetch-Site": "same-origin",
+	},
+	"body": `lsd=${lsd}&variables={"postID":"${postId}"}&doc_id=5587632691339264`,
+	"method": "POST",
 	}).then(async res => {
 		return await res.json()
 	})
