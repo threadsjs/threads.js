@@ -55,3 +55,19 @@ export async function getPost(postId) {
 		return await res.json()
 	})
 }
+
+export async function postThread(contents, userId, token) {
+	return await fetch(`https://i.instagram.com/api/v1/media/configure_text_only_post/`, {
+		method: 'POST',
+		headers: {
+			'User-Agent': 'Barcelona 289.0.0.77.109 Android',
+			'Authorization': 'Bearer IGT:2:' + token,
+			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+			'Sec-Fetch-Site': 'same-origin'
+		},
+		body: `signed_body=SIGNATURE.%7B%22publish_mode%22%3A%22text_post%22%2C%22text_post_app_info%22%3A%22%7B%5C%22reply_control%5C%22%3A0%7D%22%2C%22timezone_offset%22%3A%22-25200%22%2C%22source_type%22%3A%224%22%2C%22_uid%22%3A%22${userId}%22%2C%22device_id%22%3A%22android-${(Math.random()*1e24).toString(36)}%22%2C%22caption%22%3A%22${contents}%22%2C%22device%22%3A%7B%22manufacturer%22%3A%22OnePlus%22%2C%22model%22%3A%22ONEPLUS+A3010%22%2C%22android_version%22%3A25%2C%22android_release%22%3A%227.1.1%22%7D%7D`
+	}).then(async res => {
+		const user = await res.json()
+		return user
+	})
+}
