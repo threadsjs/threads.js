@@ -119,6 +119,19 @@ class Client extends events_1.EventEmitter {
             return yield response.json();
         });
     }
+    getRecommendedUsers() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = "https://i.instagram.com/api/v1/text_feed/recommended_users/";
+            const requestOptions = {
+                headers: {
+                    "User-Agent": this.userAgent,
+                    Authorization: `Bearer IGT:2:${this.token}`,
+                },
+            };
+            const response = yield (0, undici_1.fetch)(url, requestOptions);
+            return yield response.json();
+        });
+    }
     getPost(postId) {
         return __awaiter(this, void 0, void 0, function* () {
             const lsd = yield this.getLsd();
