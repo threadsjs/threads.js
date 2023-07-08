@@ -1,4 +1,4 @@
-import { fetch } from 'undici';
+const { fetch } = require('undici');
 
 async function getLsd() {
 	return await fetch("https://www.threads.net/@instagram").then(async res => {
@@ -10,7 +10,7 @@ async function getLsd() {
 	})
 }
 
-export async function getToken(username, password) {
+async function getToken(username, password) {
 	const id = (Math.random()*1e24).toString(36)
 	return await fetch("https://i.instagram.com/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/",{
 		method: "POST",
@@ -28,7 +28,7 @@ export async function getToken(username, password) {
 	});
 }
 
-export async function getUser(userId, token) {
+async function getUser(userId, token) {
 	return await fetch(`https://i.instagram.com/api/v1/users/${userId}/info`, {
 		headers: {
 			'User-Agent': 'Barcelona 289.0.0.77.109 Android',
@@ -40,7 +40,7 @@ export async function getUser(userId, token) {
 	})
 }
 
-export async function getPost(postId) {
+async function getPost(postId) {
 	const lsd = await getLsd()
 	return await fetch("https://www.threads.net/api/graphql", {
 	"credentials": "omit",
@@ -57,7 +57,7 @@ export async function getPost(postId) {
 	})
 }
 
-export async function postThread(contents, userId, token) {
+async function postThread(contents, userId, token) {
 	return await fetch(`https://i.instagram.com/api/v1/media/configure_text_only_post/`, {
 		method: 'POST',
 		headers: {
@@ -72,3 +72,10 @@ export async function postThread(contents, userId, token) {
 		return user
 	})
 }
+
+module.exports = {
+	getToken,
+	getUser,
+	getPost,
+	postThread,
+};
