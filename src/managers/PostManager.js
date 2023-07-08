@@ -11,6 +11,7 @@ class PostManager extends RESTManager {
 			_uid: user,
 			device_id: `android-${id}`,
 			caption: contents,
+			upload_id: new Date().getTime(),
 			device: {
 				manufacturer: "OnePlus",
 				model: "ONEPLUS+A3010",
