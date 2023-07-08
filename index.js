@@ -47,19 +47,19 @@ async function getToken(username, password) {
   const response = await fetch(url, requestOptions);
   const text = await response.text();
   const pos = text.search("Bearer IGT:2:");
-  const token = text.substring(pos + 13, pos + 173);
+  const token = text.substring(pos + 13, pos + 177);
   return token;
 }
 
 class ThreadsAPI {
-  constructor({ token }) {
+  constructor({ token, userAgent, appId }) {
     if (!token) {
       throw new Error("Token is required.");
     }
 
     this.token = token;
-    this.userAgent = "Barcelona 289.0.0.77.109 Android";
-    this.appId = "238260118697367";
+    this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
+    this.appId = appId || "238260118697367";
   }
 
   async getLsd() {
