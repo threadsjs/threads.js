@@ -9,10 +9,10 @@ class PostManager extends RESTManager {
 		return await this.request(`/api/v1/media/${post}_${user}/likers/`);
 	}
 
-	async create(contents, user) {
+	async create(contents, user, embed) {
 		const requestBody = {
 			publish_mode: "text_post",
-			text_post_app_info: '{"reply_control":0}',
+			text_post_app_info: '{"reply_control":0}' + embed !== null ? embed : '',
 			timezone_offset: "-25200",
 			source_type: "4",
 			_uid: user,
@@ -36,6 +36,10 @@ class PostManager extends RESTManager {
 		return await this.request(`/api/v1/media/${post}_${user}/like/`, {
 			method: 'POST',
 		});
+	}
+
+	async embed(url) {
+		return await this.request(`/api/v1/text_feed/link_preview/?url=${encodeURIComponent(url)}`);
 	}
 }
 
