@@ -5,7 +5,7 @@ const UserManager = require('./managers/UserManager');
 const PostManager = require('./managers/PostManager');
 
 async function getToken(username, password) {
-  const id = this.androidID
+  const id = this.androidId
   const url =
     "https://i.instagram.com/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/";
 
@@ -67,7 +67,7 @@ class Client extends EventEmitter {
     this.token = token;
     this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
     this.appId = appId || "238260118697367";
- 	  this.androidID = (Math.random() * 1e24).toString(36);
+ 	  this.androidId = (Math.random() * 1e24).toString(36);
 
     this.rest = new RESTManager(this);
 
