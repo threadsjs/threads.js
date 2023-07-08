@@ -1,5 +1,7 @@
 import { EventEmitter } from 'node:events';
 
+export function getToken(username: string, password: string): string;
+
 export class Client extends EventEmitter {
 	public constructor(options: ClientOptions);
 
