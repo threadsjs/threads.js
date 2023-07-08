@@ -48,7 +48,8 @@ async function getToken(username, password) {
   const response = await fetch(url, requestOptions);
   const text = await response.text();
   const pos = text.search("Bearer IGT:2:");
-  const token = text.substring(pos + 13, pos + 177);
+  const end = text.substring(pos).search('/\\/');
+  const token = text.substring(pos + 13, end - 1);
   return token;
 }
 
@@ -74,7 +75,7 @@ class Client extends EventEmitter {
     const response = await fetch(url, requestOptions);
     const text = await response.text();
     const pos = text.search('"token"');
-    const end = text.substring(pos).search('\\');
+    const end = text.substring(pos).search('/\\/');
     const lsd = text.substring(pos + 9, end - 1);
     return lsd;
   }
