@@ -54,7 +54,7 @@ async function getToken(username, password) {
 
 class Client extends EventEmitter {
   constructor({ token, userAgent, appId }) {
-    super();
+    super({ captureRejections: true });
     
     if (!token) {
       throw new Error("Token is required.");
