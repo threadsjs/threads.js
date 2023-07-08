@@ -98,6 +98,21 @@ class Client extends EventEmitter {
     return user;
   }
 
+  async getUserFeed(userId: string): Promise<any> {
+    const url = `https://i.instagram.com/api/v1/text_feed/${userId}/profile`;
+    const requestOptions = {
+      headers: {
+        "User-Agent": this.userAgent,
+        Authorization: `Bearer IGT:2:${this.token}`,
+      },
+    };
+  
+    const response = await fetch(url, requestOptions);
+    const feed = await response.json();
+    return feed;
+  }
+  
+
   async getPost(postId: string): Promise<any> {
     const lsd = await this.getLsd();
     const url = "https://www.threads.net/api/graphql";
