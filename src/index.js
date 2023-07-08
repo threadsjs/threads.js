@@ -1,5 +1,7 @@
 const EventEmitter = require('node:events');
 const { fetch } = require("undici");
+const RESTManager = require('./managers/RESTManager');
+const UserManager = require('./managers/UserManager');
 
 async function getToken(username, password) {
   const id = (Math.random() * 1e24).toString(36);
@@ -64,6 +66,10 @@ class Client extends EventEmitter {
     this.token = token;
     this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
     this.appId = appId || "238260118697367";
+
+    this.rest = new RESTManager(this);
+
+    this.users = new UserManager(this);
   }
 
   async getLsd() {
@@ -78,20 +84,6 @@ class Client extends EventEmitter {
     const end = text.substring(pos).search('/\\/');
     const lsd = text.substring(pos + 9, end - 1);
     return lsd;
-  }
-
-  async getUser(userId) {
-    const url = `https://i.instagram.com/api/v1/users/${userId}/info`;
-    const requestOptions = {
-      headers: {
-        "User-Agent": this.userAgent,
-        Authorization: `Bearer IGT:2:${this.token}`,
-      },
-    };
-
-    const response = await fetch(url, requestOptions);
-    const user = await response.json();
-    return user;
   }
 
   async getPost(postId) {
@@ -120,6 +112,8 @@ class Client extends EventEmitter {
     const response = await fetch(url, requestOptions);
     return await response.json();
   }
+
+  async 
 
   async postThread(contents, userId) {
     const id = (Math.random() * 1e24).toString(36);
