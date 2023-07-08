@@ -1,8 +1,13 @@
 const RESTManager = require('./RESTManager');
 
 class PostManager extends RESTManager {
+	constructor() {
+		super();
+		this.androidId = (Math.random() * 1e24).toString(36);
+	}
+	
 	async create(contents, user) {
-		const id = (Math.random() * 1e24).toString(36);
+		const id = this.androidId;
 		const requestBody = {
 			publish_mode: "text_post",
 			text_post_app_info: '{"reply_control":0}',
