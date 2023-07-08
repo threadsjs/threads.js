@@ -75,49 +75,6 @@ class Client extends EventEmitter {
 
 		this.posts = new PostManager(this);
 	}
-
-	async getLsd() {
-		const url = "https://www.threads.net/@instagram";
-		const requestOptions = {
-			method: "GET",
-		};
-
-		const response = await fetch(url, requestOptions);
-		const text = await response.text();
-		const pos = text.search('"token"');
-		const end = text.substring(pos).search('/\\/');
-		const lsd = text.substring(pos + 9, end - 1);
-		return lsd;
-	}
-
-	// @TODO: get posts from threads itself.
-	// threads will only seek out the endpoint for posts if it can't be cached iirc
-	async getPost(postId) {
-		const lsd = await this.getLsd();
-		const url = "https://www.threads.net/api/graphql";
-		const requestBody = {
-			lsd: lsd,
-			variables: JSON.stringify({ postID: postId }),
-			doc_id: "5587632691339264",
-		};
-
-		const requestOptions = {
-			method: "POST",
-			credentials: "omit",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-				"X-IG-App-ID": this.appId,
-				"X-FB-LSD": lsd,
-				"Sec-Fetch-Site": "same-origin",
-			},
-			body: `lsd=${requestBody.lsd}&variables=${encodeURIComponent(
-				requestBody.variables
-			)}&doc_id=${requestBody.doc_id}`,
-		};
-
-		const response = await fetch(url, requestOptions);
-		return await response.json();
-	}
 }
 
 module.exports = {
