@@ -3,6 +3,7 @@ const { fetch } = require("undici");
 const RESTManager = require('./managers/RESTManager');
 const UserManager = require('./managers/UserManager');
 const PostManager = require('./managers/PostManager');
+const FeedManager = require('./managers/FeedManager')
 
 async function getToken(username, password) {
 	const id = this.androidId
@@ -74,6 +75,8 @@ class Client extends EventEmitter {
 		this.users = new UserManager(this);
 
 		this.posts = new PostManager(this);
+
+		this.feeds = new FeedManager(this);
 	}
 }
 
