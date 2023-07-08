@@ -4,7 +4,7 @@ const base = 'https://i.instagram.com'
 
 class RESTManager {
 	constructor(client) {
-	  Object.defineProperty(this, 'client', { value: client });
+		Object.defineProperty(this, 'client', { value: client });
 	}
 
 	async request(url, options) {

@@ -1,20 +1,18 @@
 const RESTManager = require('./RESTManager');
 
 class PostManager extends RESTManager {
-	constructor() {
-		super();
-		this.androidId = (Math.random() * 1e24).toString(36);
+	async fetch(post) {
+		return await this.request(`/api/v1/text_feed/${post}/replies`);
 	}
 	
 	async create(contents, user) {
-		const id = this.androidId;
 		const requestBody = {
 			publish_mode: "text_post",
 			text_post_app_info: '{"reply_control":0}',
 			timezone_offset: "-25200",
 			source_type: "4",
 			_uid: user,
-			device_id: `android-${id}`,
+			device_id: `android-${this.client.androidId}`,
 			caption: contents,
 			upload_id: new Date().getTime(),
 			device: {
