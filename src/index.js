@@ -2,6 +2,7 @@ const EventEmitter = require('node:events');
 const { fetch } = require("undici");
 const RESTManager = require('./managers/RESTManager');
 const UserManager = require('./managers/UserManager');
+const PostManager = require('./managers/PostManager');
 
 async function getToken(username, password) {
   const id = (Math.random() * 1e24).toString(36);
@@ -70,6 +71,8 @@ class Client extends EventEmitter {
     this.rest = new RESTManager(this);
 
     this.users = new UserManager(this);
+
+    this.posts = new PostManager(this);
   }
 
   async getLsd() {
@@ -86,6 +89,8 @@ class Client extends EventEmitter {
     return lsd;
   }
 
+  // @TODO: get posts from threads itself.
+  // threads will only seek out the endpoint for posts if it can't be cached iirc
   async getPost(postId) {
     const lsd = await this.getLsd();
     const url = "https://www.threads.net/api/graphql";
@@ -107,46 +112,6 @@ class Client extends EventEmitter {
       body: `lsd=${requestBody.lsd}&variables=${encodeURIComponent(
         requestBody.variables
       )}&doc_id=${requestBody.doc_id}`,
-    };
-
-    const response = await fetch(url, requestOptions);
-    return await response.json();
-  }
-
-  async 
-
-  async postThread(contents, userId) {
-    const id = (Math.random() * 1e24).toString(36);
-    const url =
-      "https://i.instagram.com/api/v1/media/configure_text_only_post/";
-
-    const requestBody = {
-      publish_mode: "text_post",
-      text_post_app_info: '{"reply_control":0}',
-      timezone_offset: "-25200",
-      source_type: "4",
-      _uid: userId,
-      device_id: `android-${id}`,
-      caption: contents,
-      device: {
-        manufacturer: "OnePlus",
-        model: "ONEPLUS+A3010",
-        android_version: 25,
-        android_release: "7.1.1",
-      },
-    };
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "User-Agent": this.userAgent,
-        Authorization: `Bearer IGT:2:${this.token}`,
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Sec-Fetch-Site": "same-origin",
-      },
-      body: `signed_body=SIGNATURE.${encodeURIComponent(
-        JSON.stringify(requestBody)
-      )}`,
     };
 
     const response = await fetch(url, requestOptions);
