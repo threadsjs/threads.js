@@ -1,3 +1,4 @@
+const EventEmitter = require('node:events');
 const { fetch } = require("undici");
 
 async function getToken(username, password) {
@@ -51,7 +52,7 @@ async function getToken(username, password) {
   return token;
 }
 
-class ThreadsAPI {
+class Client extends EventEmitter {
   constructor({ token, userAgent, appId }) {
     if (!token) {
       throw new Error("Token is required.");
@@ -158,5 +159,5 @@ class ThreadsAPI {
 
 module.exports = {
   getToken,
-  ThreadsAPI,
+  Client,
 };
