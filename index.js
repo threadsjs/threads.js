@@ -92,6 +92,33 @@ class Client extends events_1.EventEmitter {
             return user;
         });
     }
+    getUserFeed(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `https://i.instagram.com/api/v1/text_feed/${userId}/profile`;
+            const requestOptions = {
+                headers: {
+                    "User-Agent": this.userAgent,
+                    Authorization: `Bearer IGT:2:${this.token}`,
+                },
+            };
+            const response = yield (0, undici_1.fetch)(url, requestOptions);
+            const feed = yield response.json();
+            return feed;
+        });
+    }
+    searchUsers(query, count) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `https://i.instagram.com/api/v1/users/search/?q=${encodeURIComponent(query)}&count=${count}&timezone_offset=0`;
+            const requestOptions = {
+                headers: {
+                    "User-Agent": this.userAgent,
+                    Authorization: `Bearer IGT:2:${this.token}`,
+                },
+            };
+            const response = yield (0, undici_1.fetch)(url, requestOptions);
+            return yield response.json();
+        });
+    }
     getPost(postId) {
         return __awaiter(this, void 0, void 0, function* () {
             const lsd = yield this.getLsd();
@@ -103,7 +130,7 @@ class Client extends events_1.EventEmitter {
             };
             const requestOptions = {
                 method: "POST",
-                credentials: "omit",
+                credentials: 'omit',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     "X-IG-App-ID": this.appId,

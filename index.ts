@@ -111,7 +111,21 @@ class Client extends EventEmitter {
     const feed = await response.json();
     return feed;
   }
+
+  async searchUsers(query: string, count: number): Promise<any> {
+    const url = `https://i.instagram.com/api/v1/users/search/?q=${encodeURIComponent(
+      query
+    )}&count=${count}&timezone_offset=0`;
+    const requestOptions = {
+      headers: {
+        "User-Agent": this.userAgent,
+        Authorization: `Bearer IGT:2:${this.token}`,
+      },
+    };
   
+    const response = await fetch(url, requestOptions);
+    return await response.json();
+  }
 
   async getPost(postId: string): Promise<any> {
     const lsd = await this.getLsd();
