@@ -4,7 +4,8 @@ async function getLsd() {
 	return await fetch("https://www.threads.net/@instagram").then(async res => {
 		const text = await res.text();
 		const pos = text.search("\"token\"");
-		const lsd = text.substring(pos + 9, pos + 31);
+		const end = text.substring(pos).search("\"")
+		const lsd = text.substring(pos + 9, end - 1);
 		return lsd
 	})
 }
