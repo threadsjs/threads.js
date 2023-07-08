@@ -1,12 +1,10 @@
 const RESTManager = require('./RESTManager');
 
 class PostManager extends RESTManager {
-  private readonly androidId: string;
-
-  constructor(androidId: string) {
-    	super();
-     	this.androidId = (Math.random() * 1e24).toString(36);
-     }
+	constructor() {
+		super();
+		this.androidId = (Math.random() * 1e24).toString(36);
+	}
 	
 	async create(contents, user) {
 		const id = this.androidId;
@@ -39,7 +37,3 @@ class PostManager extends RESTManager {
 }
 
 module.exports = PostManager;
-
-
-
-
