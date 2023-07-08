@@ -18,9 +18,10 @@ class RESTManager {
 			'Sec-Fetch-Site': 'same-origin',
 		};
 		if (options.method === 'POST') {
-			options.headers.append({
+			options.headers = {
+				...options.headers,
 				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			});
+			};
 		};
 		const res = await fetch(base + url, { ... options });
 		const contentType = res.headers.get('content-type');
