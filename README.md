@@ -10,7 +10,7 @@ npm install @threadsjs/threads.js
 
 # Example usage
 ```js
-import { getToken, getPost } from '@threadsjs/threads.js';
+import { getToken, getUser } from '@threadsjs/threads.js';
 
 await getToken('username', 'password').then(async token => {
 	await getUser('25025320', token).then(user => {
