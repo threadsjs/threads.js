@@ -4,7 +4,11 @@ class PostManager extends RESTManager {
 	async fetch(post) {
 		return await this.request(`/api/v1/text_feed/${post}/replies`);
 	}
-	
+
+	async likers(post) {
+		return await this.request(`/api/v1/media/${post}_${user}/likers/`);
+	}
+
 	async create(contents, user) {
 		const requestBody = {
 			publish_mode: "text_post",
