@@ -74,7 +74,7 @@ class Client extends EventEmitter {
     const response = await fetch(url, requestOptions);
     const text = await response.text();
     const pos = text.search('"token"');
-    const end = text.substring(pos).search('"');
+    const end = text.substring(pos).search('\\');
     const lsd = text.substring(pos + 9, end - 1);
     return lsd;
   }
