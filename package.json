@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "undici": "^5.22.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.4.1",
+    "jest": "^29.6.1",
+    "ts-jest": "^29.1.1"
   }
 }
