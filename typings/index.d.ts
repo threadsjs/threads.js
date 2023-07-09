@@ -263,6 +263,41 @@ declare module '@threadsjs/threads.js' {
 		has_public_channels: boolean;
 	}
 
+	export class UserSearch extends Base {
+		num_result: number;
+		users: UserSearchObject[];
+		has_more: boolean;
+		rank_token: string;
+	}
+
+	export class UserSearchObject {
+		has_anonymous_profile_picture: boolean;
+		follower_count: number;
+		media_count: number;
+		following_count: number;
+		following_tag_count: number;
+		fbid_v2: string;
+		has_onboarded_to_text_post_app: boolean;
+		show_text_post_app_badge: boolean;
+		text_post_app_joiner_number: number;
+		show_ig_app_switcher_badge: boolean;
+		pk: string;
+		pk_id: string;
+		username: string;
+		full_name: string;
+		is_private: boolean;
+		is_verified: boolean;
+		profile_pic_id: string;
+		profile_pic_url: string;
+		has_opt_eligible_shop: boolean;
+		account_badges: any[];
+		third_party_downloads_enabled: number;
+		unseen_count: number;
+		friendship_status: FriendshipStatus;
+		latest_reel_media: number;
+		should_show_category: boolean;
+	}
+
 	export class FriendshipStatus {
 		following: boolean;
 		followed_by: boolean;
