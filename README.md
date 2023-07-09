@@ -10,7 +10,7 @@ thread.js is a Node.js library that allows you to interact with the Threads API
 
 <p align="center">
   <a href="#features">Features</a> •
-  <a href="#installation-and-updating">Installation and Updating</a> •
+  <a href="#installation-and-updating">Installation and updating</a> •
   <a href="#usage">Usage</a> •
   <a href="#methods">Methods</a>
 </p>
@@ -23,29 +23,22 @@ thread.js is a Node.js library that allows you to interact with the Threads API
 * Authenticated
 * 100% coverage
 
-## Installation and Updating
-Use this command to install the library for the first time and to keep the library up to date.
+## Installation and updating
 ```
 npm install @threadsjs/threads.js
 ```
 ## Usage
-1. Import the library
 ```js
-const { getToken, Client } = require("@threadsjs/threads.js");
-```
-or
-```js
-import { getToken, Client } from "@threadsjs/threads.js";
-```
-2. Receive token
-```js
-const token = await getToken('username', 'password');
-```
-3. Initialize client
-```js
-const client = new Client({
-    token: "token"
-})
+const { getToken, Client } = require('@threadsjs/threads.js');
+
+(async () => {
+	const token = await getToken('username', 'password');
+	const client = new Client({ token });
+
+	await client.users.fetch('25025320').then(user => {
+		console.log(user);
+	});
+})();
 ```
 
 ## Methods
