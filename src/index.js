@@ -1,10 +1,10 @@
-const { fetch } = require("undici");
 const EventEmitter = require("node:events");
-const { parseBloksResponse } = require("./utils");
+const { fetch } = require("undici");
 const RESTManager = require("./managers/RESTManager");
 const UserManager = require("./managers/UserManager");
 const PostManager = require("./managers/PostManager");
 const FeedManager = require("./managers/FeedManager");
+const { parseBloksResponse } = require("./util/Bloks.js");
 
 const androidId = (Math.random() * 1e24).toString(36);
 
