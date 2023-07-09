@@ -52,8 +52,8 @@ async function getToken(username, password) {
 	const response = await fetch(url, requestOptions);
 	const text = await response.text();
 	const pos = text.search("Bearer IGT:2:");
-	const end = text.substring(pos).search('/\\/');
-	const token = text.substring(pos + 13, end - 1);
+	const sliced = text.substring(pos);
+	const token = sliced.substring(13, sliced.search(/\\\*?/gm));
 	return token;
 }
 
