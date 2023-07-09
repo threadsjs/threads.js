@@ -44,7 +44,7 @@ declare module '@threadsjs/threads.js/src/managers/UserManager.js' {
 declare module '@threadsjs/threads.js' {
 	import { EventEmitter } from 'node:events';
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
-	import FeedManager from "@threadsjs/threads.js/src/managers/UserManager.js";
+	import FeedManager from "@threadsjs/threads.js/src/managers/FeedManager.js";
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 
