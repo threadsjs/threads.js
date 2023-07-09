@@ -48,7 +48,7 @@ declare module '@threadsjs/threads.js' {
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 
-	export function getToken(username: string, password: string): string;
+	export function getToken(username: string, password: string): Promise<string>;
 
 	export class Client extends EventEmitter {
 		public constructor(options: ClientOptions);
