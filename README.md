@@ -8,6 +8,13 @@ thread.js is a Node.js library that allows you to interact with the Threads API
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/threadsjs/threads.js.svg)](http://isitmaintained.com/project/threadsjs/threads.js "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/threadsjs/threads.js.svg)](http://isitmaintained.com/project/threadsjs/threads.js "Percentage of issues still open")
 
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#installation-and-updating">Installation and Updating</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#methods">Methods</a>
+</p>
+
 </div>
 
 ## Features
