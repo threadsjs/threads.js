@@ -7,12 +7,25 @@ declare module '@threadsjs/threads.js/src/managers/RESTManager.js' {
 	}
 }
 
+declare module '@threadsjs/threads.js/src/managers/FeedManager.js' {
+	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
+	export default class FeedManager extends RESTManager {
+		fetchThreads(user: string): Promise<any>;
+		fetchReplies(user: string): Promise<any>;
+		recommended(): Promise<any>;
+	}
+}
+
 declare module '@threadsjs/threads.js/src/managers/PostManager.js' {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export default class PostManager extends RESTManager {
+		fetch(post: string) : Promise<any>;
+		likers(post: string, user: string) : Promise<any>;
 		create(contents: string, user: string) : Promise<any>;
 		reply(contents: string, user: string, post: string): Promise<any>;
+		delete(post: string, user: string): Promise<any>;
 		like(post: string, user: string) : Promise<any>;
+		embed(url: string) : Promise<any>;
 	}
 }
 
@@ -22,6 +35,9 @@ declare module '@threadsjs/threads.js/src/managers/UserManager.js' {
 	export default class UserManager extends RESTManager {
 		fetch(user: string): Promise<User>;
 		follow(user: string): Promise<FriendshipStatus>;
+		search(query: string, count: string): Promise<any>;
+		followers(user: string): Promise<any>;
+		following(user: string): Promise<any>;
 	}
 }
 

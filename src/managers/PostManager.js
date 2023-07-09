@@ -5,7 +5,7 @@ class PostManager extends RESTManager {
 		return await this.request(`/api/v1/text_feed/${post}/replies`);
 	}
 
-	async likers(post) {
+	async likers(post, user) {
 		return await this.request(`/api/v1/media/${post}_${user}/likers/`);
 	}
 
