@@ -1,6 +1,13 @@
 const RESTManager = require('./RESTManager');
 
 class FeedManager extends RESTManager {
+	async fetch() {
+		return await this.request('/api/v1/feed/text_post_app_timeline/', {
+			method: 'POST',
+			body: 'pagination_source=text_post_feed_threads'
+		})
+	}
+
 	async fetchThreads(user) {
 		return await this.request(`/api/v1/text_feed/${user}/profile`);
 	}
