@@ -6,7 +6,7 @@ const PostManager = require('./managers/PostManager');
 const FeedManager = require('./managers/FeedManager')
 
 async function getToken(username, password) {
-	const id = this.androidId
+	const id = (Math.random() * 1e24).toString(36);
 	const url =
 		"https://i.instagram.com/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/";
 
