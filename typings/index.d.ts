@@ -10,6 +10,7 @@ declare module '@threadsjs/threads.js/src/managers/RESTManager.js' {
 declare module '@threadsjs/threads.js/src/managers/FeedManager.js' {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export default class FeedManager extends RESTManager {
+		fetch(): Promise<any>;
 		fetchThreads(user: string): Promise<any>;
 		fetchReplies(user: string): Promise<any>;
 		recommended(): Promise<any>;
