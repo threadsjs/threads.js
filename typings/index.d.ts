@@ -44,9 +44,9 @@ declare module '@threadsjs/threads.js/src/managers/UserManager.js' {
 declare module '@threadsjs/threads.js' {
 	import { EventEmitter } from 'node:events';
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
+	import FeedManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
-
 
 	export function getToken(username: string, password: string): string;
 
@@ -61,6 +61,7 @@ declare module '@threadsjs/threads.js' {
 		rest: RESTManager;
 		users: UserManager;
 		posts: PostManager;
+		feeds: FeedManager;
 	}
 
 	export interface ClientOptions {
