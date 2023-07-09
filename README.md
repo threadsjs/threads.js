@@ -14,8 +14,8 @@ npm install @threadsjs/threads.js
 const { getToken, Client } = require('./src/index.js');
 
 (async () => {
-  const token = await getToken('username', 'password');
-  const client = new Client({ token });
+	const token = await getToken('username', 'password');
+	const client = new Client({ token });
 
 	await client.users.fetch('25025320').then(user => {
 		console.log(user);
