@@ -35,7 +35,7 @@ declare module '@threadsjs/threads.js/src/managers/UserManager.js' {
 	export default class UserManager extends RESTManager {
 		fetch(user: string): Promise<User>;
 		follow(user: string): Promise<FriendshipStatus>;
-		search(query: string, count: string): Promise<any>;
+		search(query: string, count?: string): Promise<any>;
 		followers(user: string): Promise<any>;
 		following(user: string): Promise<any>;
 	}
