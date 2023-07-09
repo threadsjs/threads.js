@@ -11,6 +11,7 @@ declare module '@threadsjs/threads.js/src/managers/PostManager.js' {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export default class PostManager extends RESTManager {
 		create(contents: string, user: string) : Promise<any>;
+		reply(contents: string, user: string, post: string): Promise<any>;
 		like(post: string, user: string) : Promise<any>;
 	}
 }
