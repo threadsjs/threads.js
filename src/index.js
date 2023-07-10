@@ -120,8 +120,8 @@ class Client extends EventEmitter {
 						const json = await response.json();
 						const header = response.headers.get('Ig-Set-Authorization');
 
-						if (json.logged_in_user.pk) {
-							self.userId = json.logged_in_user.pk;
+						if (json.logged_in_user.pk_id) {
+							self.userId = json.logged_in_user.pk_id;
 						}
 
 						clearInterval(interval);
@@ -136,8 +136,8 @@ class Client extends EventEmitter {
 			return;
 		}
 
-		if (bloks.login_response.logged_in_user.pk) {
-			this.userId = bloks.login_response.logged_in_user.pk;
+		if (bloks.login_response.logged_in_user.pk_id) {
+			this.userId = bloks.login_response.logged_in_user.pk_id;
 		}
 
 		this.token = bloks.headers?.["IG-Set-Authorization"].replace("Bearer IGT:2:", "");
