@@ -9,12 +9,12 @@ const { parseBloksResponse } = require("./util/Bloks.js");
 const androidId = (Math.random() * 1e24).toString(36);
 
 class Client extends EventEmitter {
-	constructor(options = {}) {
+	constructor({ token, userAgent, appId ) {
 		super({ captureRejections: true });
 
-		this.token = options?.token || null;
-		this.userAgent = options?.userAgent || "Barcelona 289.0.0.77.109 Android";
-		this.appId = options?.appId || "238260118697367";
+		this.token = token || null;
+		this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
+		this.appId = appId || "238260118697367";
 		this.androidId = androidId;
 		this.userId = null;
 
