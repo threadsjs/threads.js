@@ -132,7 +132,7 @@ class Client extends EventEmitter {
 			return;
 		}
 
-		if (bloks.login_response.logged_in_user.pk) {
+		if (bloks.login_response && bloks.login_response.logged_in_user.pk) {
 			this.userId = bloks.login_response.logged_in_user.pk_id;
 		}
 
