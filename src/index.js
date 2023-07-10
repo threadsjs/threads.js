@@ -74,6 +74,10 @@ class Client extends EventEmitter {
 		const text = await response.text();
 		const bloks = parseBloksResponse(text);
 
+		if ('error' in bloks && bloks.error.error_user_msg === "challenge_required") {
+			throw new Error('Your Instagram account is facing a checkpoint.')
+		}
+
 		if (bloks.two_factor_required) {
 			const {
 				two_factor_identifier,
@@ -132,8 +136,8 @@ class Client extends EventEmitter {
 			return;
 		}
 
-		if (bloks.login_response && bloks.login_response.logged_in_user.pk) {
-			this.userId = bloks.login_response.logged_in_user.pk_id;
+		if (bloks.login_response.logged_in_user.pk) {
+			this.userId = bloks.login_response.logged_in_user.pk;
 		}
 
 		this.token = bloks.headers?.["IG-Set-Authorization"].replace("Bearer IGT:2:", "");
