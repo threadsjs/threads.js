@@ -73,10 +73,6 @@ class Client extends EventEmitter {
 		const response = await fetch(base + loginUrl, requestOptions);
 		const text = await response.text();
 		const bloks = parseBloksResponse(text);
-
-		if (bloks.login_response.logged_in_user.pk) {
-			this.userId = bloks.login_response.logged_in_user.pk_id;
-		}
 	
 		if (bloks.two_factor_required) {
 			const {
@@ -127,6 +123,10 @@ class Client extends EventEmitter {
 			});
 	
 			this.token = token;
+		}
+
+		if (bloks.login_response && bloks.login_response.logged_in_user.pk) {
+			this.userId = bloks.login_response.logged_in_user.pk_id;
 		}
 	
 		this.token = bloks.headers?.["IG-Set-Authorization"].replace("Bearer IGT:2:", "");
