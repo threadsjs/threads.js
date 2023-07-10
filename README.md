@@ -45,27 +45,27 @@ const { getToken, Client } = require('@threadsjs/threads.js');
 ### client.users.fetch
 In the parameters, pass the userId of the user whose information you want to get.
 ```js
-await client.users.fetch(1)
+await client.users.fetch("1")
 ```
 ### client.users.follow
 Pass the userId of the user you want to subscribe to in the parameters
 ```js
-await client.users.follow(1)
+await client.users.follow("1")
 ```
 ### client.users.search
 Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30)
 ```js
-await client.users.search("zuck", 10)
+await client.users.search("zuck", "10")
 ```
 ### client.users.followers
 In the parameters, pass the userId of the user whose followers you want to get.
 ```js
-await client.users.followers(1)
+await client.users.followers("1")
 ```
 ### client.users.following
 In the parameters, pass the userId of the user whose followings you want to get.
 ```js
-await client.users.following(1)
+await client.users.following("1")
 ```
 
 <br />
@@ -73,12 +73,12 @@ await client.users.following(1)
 ### client.feeds.fetchThreads
 In the parameters, pass the userId of the user whose threads you want to get.
 ```js
-await client.feeds.fetchThreads(1)
+await client.feeds.fetchThreads("1")
 ```
 ### client.feeds.fetchReplies
 In the parameters, pass the userId of the user whose replies you want to get.
 ```js
-await client.feeds.fetchReplies(1)
+await client.feeds.fetchReplies("1")
 ```
 ### client.feeds.recommended
 Getting a list of recommendations.
@@ -101,20 +101,20 @@ await client.posts.likers("aAaAAAaaa")
 ### client.posts.create
 The method is used to create a thread. Pass the text of the thread as the first parameter, and the user id as the second
 ```js
-await client.posts.create("Hello world!", 1)
+await client.posts.create("Hello world!", "1")
 ```
 ### client.posts.reply
 The method is used to create reply to a thread. Pass the text of the reply as the first parameter, the user id as the second, and post id as the third
 ```js
-await client.posts.reply("Hello world!", 1, "aAaAAAaaa")
+await client.posts.reply("Hello world!", "1", "aAaAAAaaa")
 ```
 ### client.posts.delete
 The method is used to delete a thread. Pass the post id as the first parameter, and the user id as the second
 ```js
-await client.posts.delete("aAaAAAaaa", 1)
+await client.posts.delete("aAaAAAaaa", "1")
 ```
 ### client.posts.like
 The method is used to like a thread. Pass the post id as the first parameter, and the user id as the second
 ```js
-await client.posts.like("aAaAAAaaa", 1)
+await client.posts.like("aAaAAAaaa", "1")
 ```
