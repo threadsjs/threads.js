@@ -12,7 +12,7 @@ class Client extends EventEmitter {
 	constructor({ token, userAgent, appId }) {
 		super({ captureRejections: true });
 
-		this.token = token;
+		this.token = token || null;
 		this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
 		this.appId = appId || "238260118697367";
 		this.androidId = androidId;
