@@ -49,24 +49,24 @@ declare module '@threadsjs/threads.js' {
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 
-	export function getToken(username: string, password: string): Promise<string>;
-
 	export class Client extends EventEmitter {
 		public constructor(options: ClientOptions);
 
-		getLsd(): Promise<string>;
-		getPost(postId: string): Promise<any>;
 		token: string;
 		userAgent: string;
 		appId: string;
+		userId: string;
+
 		rest: RESTManager;
 		users: UserManager;
 		posts: PostManager;
 		feeds: FeedManager;
+
+		public login: Promise<void>; 
 	}
 
 	export interface ClientOptions {
-		token: string;
+		token?: string;
 		userAgent?: string;
 		appId?: string;
 	}

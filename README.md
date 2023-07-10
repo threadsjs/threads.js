@@ -29,11 +29,12 @@ npm install @threadsjs/threads.js
 ```
 ## Usage
 ```js
-const { getToken, Client } = require('@threadsjs/threads.js');
+const { Client } = require('@threadsjs/threads.js');
 
 (async () => {
-	const token = await getToken('username', 'password');
-	const client = new Client({ token });
+	const client = new Client();
+	// You can also specify a token: const client = new Client({ token: 'token' });
+	await client.login('username', 'password');
 
 	await client.users.fetch('25025320').then(user => {
 		console.log(user);
