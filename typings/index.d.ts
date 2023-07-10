@@ -62,7 +62,7 @@ declare module '@threadsjs/threads.js' {
 		posts: PostManager;
 		feeds: FeedManager;
 
-		public login: Promise<void>; 
+		public login(username: string, password: string): Promise<void>; 
 	}
 
 	export interface ClientOptions {
