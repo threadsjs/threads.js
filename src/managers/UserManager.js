@@ -2,11 +2,11 @@ const RESTManager = require('./RESTManager');
 
 class UserManager extends RESTManager {
 	async fetch(user) {
-		return await this.request(`/api/v1/users/${user}/info`);
+		return await this.request(`/api/v1/users/${String(user)}/info`);
 	}
 
 	async follow(user) {
-		return await this.request(`/api/v1/friendships/create/${user}/`, {
+		return await this.request(`/api/v1/friendships/create/${String(user)}/`, {
 			method: 'POST',
 		});
 	}
@@ -16,11 +16,11 @@ class UserManager extends RESTManager {
 	}
 
 	async followers(user) {
-		return await this.request(`/api/v1/friendships/${user}/followers/`);
+		return await this.request(`/api/v1/friendships/${String(user)}/followers/`);
 	}
 
 	async following(user) {
-		return await this.request(`/api/v1/friendships/${user}/following/`);
+		return await this.request(`/api/v1/friendships/${String(user)}/following/`);
 	}
 }
 
