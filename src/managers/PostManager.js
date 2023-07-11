@@ -126,10 +126,23 @@ class PostManager extends RESTManager {
 		});
 	}
 
+	async unlike(post, user) {
+		return await this.request(`/api/v1/media/${post}_${String(user)}/unlike/`, {
+			method: "POST",
+		});
+	}
+
 	async repost(post) {
 		return await this.request(`/api/v1/repost/create_repost/`, {
 			method: 'POST',
 			body: 'media_id=' + post
+		});
+	}
+
+	async unrepost(post) {
+		return await this.request(`/api/v1/repost/delete_text_app_repost/`, {
+			method: 'POST',
+			body: 'original_media_id=' + post
 		});
 	}
 

@@ -48,10 +48,20 @@ In the parameters, pass the user id (supported as string and number) of the user
 ```js
 await client.users.fetch(1)
 ```
+### client.users.show
+In the parameters, pass the user id (supported as string and number) of the user whose friendship status information you want to get.
+```js
+await client.users.show(1)
+```
 ### client.users.follow
 Pass the user id (supported as string and number) of the user you want to subscribe to in the parameters
 ```js
 await client.users.follow(1)
+```
+### client.users.unfollow
+Pass the user id (supported as string and number) of the user you want to unsubscribe from in the parameters
+```js
+await client.users.unfollow(1)
 ```
 ### client.users.search
 Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30)
@@ -130,8 +140,18 @@ The method is used to like a thread. Pass the post id as the first parameter, an
 ```js
 await client.posts.like("aAaAAAaaa", 1)
 ```
+### client.posts.unlike
+The method is used to unlike a thread. Pass the post id as the first parameter, and the user id (supported as string and number) as the second
+```js
+await client.posts.unlike("aAaAAAaaa", 1)
+```
 ### client.posts.repost
 The method is used to repost a thread. Pass the post id as the only parameter
 ```js
 await client.posts.repost("aAaAAAaaa")
+```
+### client.posts.unrepost
+The method is used to un-repost a thread. Pass the post id as the only parameter
+```js
+await client.posts.unrepost("aAaAAAaaa")
 ```
