@@ -9,11 +9,11 @@ class FeedManager extends RESTManager {
 	}
 
 	async fetchThreads(user, max_id) {
-		return await this.request(`/api/v1/text_feed/${String(user)}/profile` + (max_id ? '?max_id=' + encodeURIComponent(max_id) : ''));
+		return await this.request(`/api/v1/text_feed/${String(user)}/profile/` + (max_id ? '?max_id=' + encodeURIComponent(max_id) : ''));
 	}
 
 	async fetchReplies(user, max_id) {
-		return await this.request(`/api/v1/text_feed/${String(user)}/profile/replies` + (max_id ? '?max_id=' + encodeURIComponent(max_id) : ''));
+		return await this.request(`/api/v1/text_feed/${String(user)}/profile/replies/` + (max_id ? '?max_id=' + encodeURIComponent(max_id) : ''));
 	}
 
 	async recommended(paging_token) {
