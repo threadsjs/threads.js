@@ -71,6 +71,12 @@ await client.users.following("1")
 
 <br />
 
+### client.feeds.fetch
+Gets the default feed. In the parameters, pass the optional max_id of the previous response's next_max_id.
+```js
+await client.feeds.fetch()
+await client.feeds.fetch("aAaAAAaaa")
+```
 ### client.feeds.fetchThreads
 In the parameters, pass the userId of the user whose threads you want to get.
 ```js
