@@ -24,6 +24,7 @@ declare module '@threadsjs/threads.js/src/managers/PostManager.js' {
 		likers(post: string, user: string) : Promise<any>;
 		create(contents: string, user: string) : Promise<any>;
 		reply(contents: string, user: string, post: string): Promise<any>;
+		quote(contents: string, user: string, post: string): Promise<any>;
 		delete(post: string, user: string): Promise<any>;
 		like(post: string, user: string) : Promise<any>;
 		embed(url: string) : Promise<any>;

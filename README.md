@@ -109,6 +109,11 @@ The method is used to create reply to a thread. Pass the text of the reply as th
 ```js
 await client.posts.reply("Hello world!", "1", "aAaAAAaaa")
 ```
+### client.posts.quote
+The method is used to create a quote thread. Pass the text of the quote comment as the first parameter, the user id as the second, and post id as the third
+```js
+await client.posts.quote("Hello world!", "1", "aAaAAAaaa")
+```
 ### client.posts.delete
 The method is used to delete a thread. Pass the post id as the first parameter, and the user id as the second
 ```js
