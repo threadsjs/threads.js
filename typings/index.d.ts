@@ -56,6 +56,12 @@ declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
 		search(query: string, count?: number | string): Promise<any>;
 		followers(user: string | number): Promise<any>;
 		following(user: string | number): Promise<any>;
+		mute(user: string | number): Promise<any>;
+		unmute(user: string | number): Promise<any>;
+		restrict(user: string | number): Promise<any>;
+		unrestrict(user: string | number): Promise<any>;
+		block(user: string | number): Promise<any>;
+		unblock(user: string | number): Promise<any>;
 	}
 }
 
