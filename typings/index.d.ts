@@ -36,7 +36,9 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 		quote(contents: string, user: string | number, post: string): Promise<any>;
 		delete(post: string, user: string | number): Promise<any>;
 		like(post: string, user: string | number) : Promise<any>;
+		unlike(post: string, user: string | number) : Promise<any>;
 		repost(post: string) : Promise<any>;
+		unrepost(post: string) : Promise<any>;
 		embed(url: string) : Promise<any>;
 	}
 }
@@ -46,7 +48,9 @@ declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
 	import { User, FriendshipStatus } from "@threadsjs/threads.js";
 	export default class UserManager extends RESTManager {
 		fetch(user: string | number): Promise<User>;
+		show(user: string | number): Promise<FriendshipStatus>;
 		follow(user: string | number): Promise<FriendshipStatus>;
+		unfollow(user: string | number): Promise<FriendshipStatus>;
 		search(query: string, count?: number | string): Promise<any>;
 		followers(user: string | number): Promise<any>;
 		following(user: string | number): Promise<any>;
