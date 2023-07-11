@@ -45,7 +45,7 @@ class PostManager extends RESTManager {
     user,
     options = {
       contents: "",
-      post: null,
+      post: "",
     }
   ) {
     let text_post_app_info = JSON.stringify({

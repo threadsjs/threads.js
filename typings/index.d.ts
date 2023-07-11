@@ -23,8 +23,8 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
     data?: null | Object;
   }
   export interface ReplyOptions {
-	content: string
-	post?: null | Object
+    content: string;
+    post: string;
   }
   export default class PostManager extends RESTManager {
     fetch(post: string): Promise<any>;
@@ -43,7 +43,7 @@ declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
   export default class UserManager extends RESTManager {
     fetch(user: string | number): Promise<User>;
     follow(user: string | number): Promise<FriendshipStatus>;
-    search(query: string, count?: string): Promise<any>;
+    search(query: string, count?: number | string): Promise<any>;
     followers(user: string | number): Promise<any>;
     following(user: string | number): Promise<any>;
   }
