@@ -72,7 +72,7 @@ declare module '@threadsjs/threads.js' {
 	}
 
 	export class Base {
-		status: string;
+		status: 'ok' | 'fail';
 	}
 
 	export class User extends Base {
