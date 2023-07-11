@@ -27,6 +27,7 @@ declare module '@threadsjs/threads.js/src/managers/PostManager.js' {
 		quote(contents: string, user: string, post: string): Promise<any>;
 		delete(post: string, user: string): Promise<any>;
 		like(post: string, user: string) : Promise<any>;
+		repost(post: string) : Promise<any>;
 		embed(url: string) : Promise<any>;
 	}
 }

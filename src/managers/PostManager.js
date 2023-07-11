@@ -94,6 +94,13 @@ class PostManager extends RESTManager {
 		});
 	}
 
+	async repost(post) {
+		return await this.request(`/api/v1/repost/create_repost/`, {
+			method: 'POST',
+			body: 'media_id=' + post
+		});
+	}
+
 	async embed(url) {
 		return await this.request(`/api/v1/text_feed/link_preview/?url=${encodeURIComponent(url)}`);
 	}
