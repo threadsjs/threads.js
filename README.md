@@ -119,6 +119,8 @@ let pagination = {
 
 await client.feeds.notifications()
 await client.feeds.notifications(null, pagination)
+
+await client.feeds.notifications("text_post_app_replies")
 await client.feeds.notifications("text_post_app_replies", pagination)
 ```
 ### client.feeds.notificationseen
