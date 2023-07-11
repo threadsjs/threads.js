@@ -66,6 +66,7 @@ declare module "@threadsjs/threads.js" {
 		token: string;
 		userAgent: string;
 		appId: string;
+		androidId: string;
 		userId: string;
 
 		rest: RESTManager;
