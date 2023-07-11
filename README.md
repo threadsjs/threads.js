@@ -88,19 +88,22 @@ await client.feeds.fetch()
 await client.feeds.fetch("aAaAAAaaa")
 ```
 ### client.feeds.fetchThreads
-In the parameters, pass the user id (supported as string and number) of the user whose threads you want to get.
+In the parameters, pass the user id (supported as string and number) of the user whose threads you want to get, and an optional max_id of the previous response's next_max_id.
 ```js
-await client.feeds.fetchThreads(1)
+await client.feeds.fetchThreads(1),
+await client.feeds.fetchThreads(1, "aAaAAAaaa")
 ```
 ### client.feeds.fetchReplies
-In the parameters, pass the user id (supported as string and number) of the user whose replies you want to get.
+In the parameters, pass the user id (supported as string and number) of the user whose replies you want to get, and an optional max_id of the previous response's next_max_id.
 ```js
 await client.feeds.fetchReplies(1)
+await client.feeds.fetchReplies(1, "aAaAAAaaa")
 ```
 ### client.feeds.recommended
-Getting a list of recommendations.
+Getting a list of recommendations. In the parameters, pass the optional paging_token of the previous response.
 ```js
 await client.feeds.recommended()
+await client.feeds.recommended(15)
 ```
 
 <br />
