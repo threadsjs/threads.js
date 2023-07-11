@@ -78,6 +78,36 @@ In the parameters, pass the user id (supported as string and number) of the user
 ```js
 await client.users.following(1)
 ```
+### client.users.mute
+In the parameters, pass the user id (supported as string and number) of the user you want to mute.
+```js
+await client.users.mute(1)
+```
+### client.users.unmute
+In the parameters, pass the user id (supported as string and number) of the user you want to unmute.
+```js
+await client.users.unmute(1)
+```
+### client.users.restrict
+In the parameters, pass the user id (supported as string and number) of the user you want to restrict.
+```js
+await client.users.restrict(1)
+```
+### client.users.unrestrict
+In the parameters, pass the user id (supported as string and number) of the user you want to unrestrict.
+```js
+await client.users.unrestrict(1)
+```
+### client.users.block
+In the parameters, pass the user id (supported as string and number) of the user you want to block.
+```js
+await client.users.block(1)
+```
+### client.users.unblock
+In the parameters, pass the user id (supported as string and number) of the user you want to unblock.
+```js
+await client.users.unblock(1)
+```
 
 <br />
 
