@@ -334,10 +334,10 @@ declare module "@threadsjs/threads.js" {
 }
 
 type NotificationPagination = {
-	 max_id: string;
-	 pagination_first_record_timestamp: string;
+	max_id: string;
+	pagination_first_record_timestamp: string;
 }
 type NotificationFilter =
-   'text_post_app_replies' | 
-   'text_post_app_mentions' |
-   'verified';
+	'text_post_app_replies' | 
+	'text_post_app_mentions' |
+	'verified';
