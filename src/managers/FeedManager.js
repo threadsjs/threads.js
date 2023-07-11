@@ -9,11 +9,11 @@ class FeedManager extends RESTManager {
 	}
 
 	async fetchThreads(user) {
-		return await this.request(`/api/v1/text_feed/${user}/profile`);
+		return await this.request(`/api/v1/text_feed/${String(user)}/profile`);
 	}
 
 	async fetchReplies(user) {
-		return await this.request(`/api/v1/text_feed/${user}/profile/replies`);
+		return await this.request(`/api/v1/text_feed/${String(user)}/profile/replies`);
 	}
 
 	async recommended() {
