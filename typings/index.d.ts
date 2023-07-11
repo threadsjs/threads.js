@@ -13,6 +13,8 @@ declare module "@threadsjs/threads.js/src/managers/FeedManager.js" {
 		fetchThreads(user: string | number, max_id?: string): Promise<any>;
 		fetchReplies(user: string | number, max_id?: string): Promise<any>;
 		recommended(paging_token?: number): Promise<any>;
+		notifications(filter?: NotificationFilter, pagination?: NotificationPagination): Promise<any>;
+		notificationseen(): Promise<any>;
 	}
 }
 
@@ -330,3 +332,12 @@ declare module "@threadsjs/threads.js" {
 		is_eligible_to_subscribe: boolean;
 	}
 }
+
+type NotificationPagination = {
+	 max_id: string;
+	 pagination_first_record_timestamp: string;
+}
+type NotificationFilter =
+   'text_post_app_replies' | 
+   'text_post_app_mentions' |
+   'verified';

@@ -105,6 +105,27 @@ Getting a list of recommendations. In the parameters, pass the optional paging_t
 await client.feeds.recommended()
 await client.feeds.recommended(15)
 ```
+### client.feeds.notifications
+Getting a list of recommendations. In the parameters, pass an optional filter type and an optional pagination object with max_id and pagination_first_record_timestamp from the previous response.
+Valid filter types:
+- text_post_app_replies
+- text_post_app_mentions
+- verified
+```js
+let pagination = {
+	max_id: "1688921943.766884",
+	pagination_first_record_timestamp: "1689094189.845912"
+}
+
+await client.feeds.notifications()
+await client.feeds.notifications(null, pagination)
+await client.feeds.notifications("text_post_app_replies", pagination)
+```
+### client.feeds.notificationseen
+Clears all notifications. You might want to do this **after** client.feeds.notifications() and checking new_stories for what wasn't seen.
+```js
+await client.feeds.notificationseen()
+```
 
 <br />
 
