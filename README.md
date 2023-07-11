@@ -119,3 +119,8 @@ The method is used to like a thread. Pass the post id as the first parameter, an
 ```js
 await client.posts.like("aAaAAAaaa", "1")
 ```
+### client.posts.repost
+The method is used to repost a thread. Pass the post id as the only parameter
+```js
+await client.posts.repost("aAaAAAaaa")
+```
