@@ -9,10 +9,10 @@ declare module "@threadsjs/threads.js/src/managers/RESTManager.js" {
 declare module "@threadsjs/threads.js/src/managers/FeedManager.js" {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export default class FeedManager extends RESTManager {
-		fetch(): Promise<any>;
-		fetchThreads(user: string | number): Promise<any>;
-		fetchReplies(user: string | number): Promise<any>;
-		recommended(): Promise<any>;
+		fetch(max_id?: string): Promise<any>;
+		fetchThreads(user: string | number, max_id?: string): Promise<any>;
+		fetchReplies(user: string | number, max_id?: string): Promise<any>;
+		recommended(paging_token?: number): Promise<any>;
 	}
 }
 
