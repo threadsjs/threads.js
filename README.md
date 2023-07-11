@@ -71,6 +71,12 @@ await client.users.following(1)
 
 <br />
 
+### client.feeds.fetch
+Gets the default feed. In the parameters, pass the optional max_id of the previous response's next_max_id.
+```js
+await client.feeds.fetch()
+await client.feeds.fetch("aAaAAAaaa")
+```
 ### client.feeds.fetchThreads
 In the parameters, pass the user id (supported as string and number) of the user whose threads you want to get.
 ```js
@@ -109,6 +115,11 @@ The method is used to create reply to a thread. Pass the text of the reply as th
 ```js
 await client.posts.reply(1, { contents: "Hello World!", post: "aAaAAAaaa" })
 ```
+### client.posts.quote
+The method is used to create a quote thread. Pass the text of the quote comment as the first parameter, the user id as the second, and post id as the third
+```js
+await client.posts.quote("Hello world!", "1", "aAaAAAaaa")
+```
 ### client.posts.delete
 The method is used to delete a thread. Pass the post id as the first parameter, and the user id (supported as string and number) as the second
 ```js
@@ -118,4 +129,9 @@ await client.posts.delete("aAaAAAaaa", 1)
 The method is used to like a thread. Pass the post id as the first parameter, and the user id (supported as string and number) as the second
 ```js
 await client.posts.like("aAaAAAaaa", 1)
+```
+### client.posts.repost
+The method is used to repost a thread. Pass the post id as the only parameter
+```js
+await client.posts.repost("aAaAAAaaa")
 ```

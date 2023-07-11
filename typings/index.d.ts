@@ -22,19 +22,23 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
     content: string;
     data?: null | Object;
   }
+
   export interface ReplyOptions {
     content: string;
     post: string;
   }
-  export default class PostManager extends RESTManager {
-    fetch(post: string): Promise<any>;
-    likers(post: string, user: string): Promise<any>;
-    create(user: string | number, options: CreateOptions): Promise<any>;
-    reply(user: string | number, options: ReplyOptions): Promise<any>;
-    delete(post: string, user: string | number): Promise<any>;
-    like(post: string, user: string | number): Promise<any>;
-    embed(url: string): Promise<any>;
-  }
+
+	export default class PostManager extends RESTManager {
+		fetch(post: string) : Promise<any>;
+		likers(post: string, user: string | number) : Promise<any>;
+		create(contents: string, user: string | number) : Promise<any>;
+		reply(contents: string, user: string | number, post: string): Promise<any>;
+		quote(contents: string, user: string | number, post: string): Promise<any>;
+		delete(post: string, user: string | number): Promise<any>;
+		like(post: string, user: string | number) : Promise<any>;
+		repost(post: string) : Promise<any>;
+		embed(url: string) : Promise<any>;
+	}
 }
 
 declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
