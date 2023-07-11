@@ -17,7 +17,7 @@ class FeedManager extends RESTManager {
 	}
 
 	async recommended(paging_token) {
-		return await this.request('/api/v1/text_feed/recommended_users/' + (paging_token ? '?paging_token=' + encodeURIComponent(paging_token) : ''));
+		return await this.request('/api/v1/text_feed/recommended_users/' + (paging_token ? '?paging_token=' + paging_token : ''));
 	}
 }
 
