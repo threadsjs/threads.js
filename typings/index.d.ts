@@ -80,6 +80,7 @@ declare module "@threadsjs/threads.js" {
 		appId: string;
 		androidId: string;
 		userId: string;
+		base: string;
 
 		rest: RESTManager;
 		users: UserManager;
