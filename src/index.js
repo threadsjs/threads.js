@@ -156,7 +156,7 @@ class Client extends EventEmitter {
 							JSON.stringify([trusted_notification_polling_nonce]),
 					}).toString();
 
-					const response = await fetch(this.base + statusUrl, requestOptions);
+					const response = await fetch(self.base + statusUrl, requestOptions);
 					const json = await response.json();
 
 					if (json.review_status === 1) {
@@ -172,7 +172,7 @@ class Client extends EventEmitter {
 							})
 						}).toString()
 
-						const response = await fetch(this.base + verifyUrl, requestOptions);
+						const response = await fetch(self.base + verifyUrl, requestOptions);
 						const json = await response.json();
 						const header = response.headers.get('Ig-Set-Authorization');
 
