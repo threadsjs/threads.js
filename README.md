@@ -48,10 +48,20 @@ In the parameters, pass the user id (supported as string and number) of the user
 ```js
 await client.users.fetch(1)
 ```
+### client.users.show
+In the parameters, pass the user id (supported as string and number) of the user whose friendship status information you want to get.
+```js
+await client.users.show(1)
+```
 ### client.users.follow
 Pass the user id (supported as string and number) of the user you want to subscribe to in the parameters
 ```js
 await client.users.follow(1)
+```
+### client.users.unfollow
+Pass the user id (supported as string and number) of the user you want to unsubscribe from in the parameters
+```js
+await client.users.unfollow(1)
 ```
 ### client.users.search
 Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30)
@@ -68,6 +78,36 @@ In the parameters, pass the user id (supported as string and number) of the user
 ```js
 await client.users.following(1)
 ```
+### client.users.mute
+In the parameters, pass the user id (supported as string and number) of the user you want to mute.
+```js
+await client.users.mute(1)
+```
+### client.users.unmute
+In the parameters, pass the user id (supported as string and number) of the user you want to unmute.
+```js
+await client.users.unmute(1)
+```
+### client.users.restrict
+In the parameters, pass the user id (supported as string and number) of the user you want to restrict.
+```js
+await client.users.restrict(1)
+```
+### client.users.unrestrict
+In the parameters, pass the user id (supported as string and number) of the user you want to unrestrict.
+```js
+await client.users.unrestrict(1)
+```
+### client.users.block
+In the parameters, pass the user id (supported as string and number) of the user you want to block.
+```js
+await client.users.block(1)
+```
+### client.users.unblock
+In the parameters, pass the user id (supported as string and number) of the user you want to unblock.
+```js
+await client.users.unblock(1)
+```
 
 <br />
 
@@ -78,27 +118,54 @@ await client.feeds.fetch()
 await client.feeds.fetch("aAaAAAaaa")
 ```
 ### client.feeds.fetchThreads
-In the parameters, pass the user id (supported as string and number) of the user whose threads you want to get.
+In the parameters, pass the user id (supported as string and number) of the user whose threads you want to get, and an optional max_id of the previous response's next_max_id.
 ```js
-await client.feeds.fetchThreads(1)
+await client.feeds.fetchThreads(1),
+await client.feeds.fetchThreads(1, "aAaAAAaaa")
 ```
 ### client.feeds.fetchReplies
-In the parameters, pass the user id (supported as string and number) of the user whose replies you want to get.
+In the parameters, pass the user id (supported as string and number) of the user whose replies you want to get, and an optional max_id of the previous response's next_max_id.
 ```js
 await client.feeds.fetchReplies(1)
+await client.feeds.fetchReplies(1, "aAaAAAaaa")
 ```
 ### client.feeds.recommended
-Getting a list of recommendations.
+Getting a list of recommendations. In the parameters, pass the optional paging_token of the previous response.
 ```js
 await client.feeds.recommended()
+await client.feeds.recommended(15)
+```
+### client.feeds.notifications
+Getting a list of recommendations. In the parameters, pass an optional filter type and an optional pagination object with max_id and pagination_first_record_timestamp from the previous response.
+Valid filter types:
+- text_post_app_replies
+- text_post_app_mentions
+- verified
+```js
+let pagination = {
+	max_id: "1688921943.766884",
+	pagination_first_record_timestamp: "1689094189.845912"
+}
+
+await client.feeds.notifications()
+await client.feeds.notifications(null, pagination)
+
+await client.feeds.notifications("text_post_app_replies")
+await client.feeds.notifications("text_post_app_replies", pagination)
+```
+### client.feeds.notificationseen
+Clears all notifications. You might want to do this **after** client.feeds.notifications() and checking new_stories for what wasn't seen.
+```js
+await client.feeds.notificationseen()
 ```
 
 <br />
 
 ### client.posts.fetch
-In the parameters pass the id of the post you want to get information about
+In the parameters pass the id of the post you want to get information about, and an optional pagination token from the previous request.
 ```js
 await client.posts.fetch("aAaAAAaaa")
+await client.posts.fetch("aAaAAAaaa", "aAaAAAaaa")
 ```
 ### client.posts.likers
 In the parameters pass the id of the post whose likes you want to get
@@ -130,8 +197,18 @@ The method is used to like a thread. Pass the post id as the first parameter, an
 ```js
 await client.posts.like("aAaAAAaaa", 1)
 ```
+### client.posts.unlike
+The method is used to unlike a thread. Pass the post id as the first parameter, and the user id (supported as string and number) as the second
+```js
+await client.posts.unlike("aAaAAAaaa", 1)
+```
 ### client.posts.repost
 The method is used to repost a thread. Pass the post id as the only parameter
 ```js
 await client.posts.repost("aAaAAAaaa")
+```
+### client.posts.unrepost
+The method is used to un-repost a thread. Pass the post id as the only parameter
+```js
+await client.posts.unrepost("aAaAAAaaa")
 ```

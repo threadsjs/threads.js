@@ -2,17 +2,19 @@ declare module "@threadsjs/threads.js/src/managers/RESTManager.js" {
 	import { Client } from "@threadsjs/threads.js";
 	export default class RESTManager {
 		public constructor(client: Client);
-		request(url: string, options: object): Promise<any>;
+		request(url: string, options?: object): Promise<any>;
 	}
 }
 
 declare module "@threadsjs/threads.js/src/managers/FeedManager.js" {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export default class FeedManager extends RESTManager {
-		fetch(): Promise<any>;
-		fetchThreads(user: string | number): Promise<any>;
-		fetchReplies(user: string | number): Promise<any>;
-		recommended(): Promise<any>;
+		fetch(max_id?: string): Promise<any>;
+		fetchThreads(user: string | number, max_id?: string): Promise<any>;
+		fetchReplies(user: string | number, max_id?: string): Promise<any>;
+		recommended(paging_token?: number): Promise<any>;
+		notifications(filter?: NotificationFilter, pagination?: NotificationPagination): Promise<any>;
+		notificationseen(): Promise<any>;
 	}
 }
 
@@ -29,14 +31,16 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 	}
 
 	export default class PostManager extends RESTManager {
-		fetch(post: string) : Promise<any>;
+		fetch(post: string, paging_token?: string) : Promise<any>;
 		likers(post: string, user: string | number) : Promise<any>;
 		create(contents: string, user: string | number) : Promise<any>;
 		reply(contents: string, user: string | number, post: string): Promise<any>;
 		quote(contents: string, user: string | number, post: string): Promise<any>;
 		delete(post: string, user: string | number): Promise<any>;
 		like(post: string, user: string | number) : Promise<any>;
+		unlike(post: string, user: string | number) : Promise<any>;
 		repost(post: string) : Promise<any>;
+		unrepost(post: string) : Promise<any>;
 		embed(url: string) : Promise<any>;
 	}
 }
@@ -46,10 +50,18 @@ declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
 	import { User, FriendshipStatus } from "@threadsjs/threads.js";
 	export default class UserManager extends RESTManager {
 		fetch(user: string | number): Promise<User>;
+		show(user: string | number): Promise<FriendshipStatus>;
 		follow(user: string | number): Promise<FriendshipStatus>;
+		unfollow(user: string | number): Promise<FriendshipStatus>;
 		search(query: string, count?: number | string): Promise<any>;
 		followers(user: string | number): Promise<any>;
 		following(user: string | number): Promise<any>;
+		mute(user: string | number): Promise<any>;
+		unmute(user: string | number): Promise<any>;
+		restrict(user: string | number): Promise<any>;
+		unrestrict(user: string | number): Promise<any>;
+		block(user: string | number): Promise<any>;
+		unblock(user: string | number): Promise<any>;
 	}
 }
 
@@ -326,3 +338,12 @@ declare module "@threadsjs/threads.js" {
 		is_eligible_to_subscribe: boolean;
 	}
 }
+
+type NotificationPagination = {
+	max_id: string;
+	pagination_first_record_timestamp: string;
+}
+type NotificationFilter =
+	'text_post_app_replies' | 
+	'text_post_app_mentions' |
+	'verified';
