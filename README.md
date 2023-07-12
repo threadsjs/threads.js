@@ -162,9 +162,10 @@ await client.feeds.notificationseen()
 <br />
 
 ### client.posts.fetch
-In the parameters pass the id of the post you want to get information about
+In the parameters pass the id of the post you want to get information about, and an optional pagination token from the previous request.
 ```js
 await client.posts.fetch("aAaAAAaaa")
+await client.posts.fetch("aAaAAAaaa", "aAaAAAaaa")
 ```
 ### client.posts.likers
 In the parameters pass the id of the post whose likes you want to get
