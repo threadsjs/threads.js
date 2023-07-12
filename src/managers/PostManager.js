@@ -1,8 +1,8 @@
 const RESTManager = require("./RESTManager");
 
 class PostManager extends RESTManager {
-	async fetch(post) {
-		return await this.request(`/api/v1/text_feed/${post}/replies`);
+	async fetch(post, paging_token) {
+		return await this.request(`/api/v1/text_feed/${post}/replies/` + (paging_token ? `?paging_token=${encodeURIComponent(paging_token)}` : ""));
 	}
 
 	async likers(post, user) {

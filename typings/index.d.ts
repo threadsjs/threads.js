@@ -2,7 +2,7 @@ declare module "@threadsjs/threads.js/src/managers/RESTManager.js" {
 	import { Client } from "@threadsjs/threads.js";
 	export default class RESTManager {
 		public constructor(client: Client);
-		request(url: string, options: object): Promise<any>;
+		request(url: string, options?: object): Promise<any>;
 	}
 }
 
@@ -31,7 +31,7 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 	}
 
 	export default class PostManager extends RESTManager {
-		fetch(post: string) : Promise<any>;
+		fetch(post: string, paging_token?: string) : Promise<any>;
 		likers(post: string, user: string | number) : Promise<any>;
 		create(contents: string, options: CreateOptions) : Promise<any>;
 		reply(user: string | number, options: ReplyOptions): Promise<any>;
