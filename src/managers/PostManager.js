@@ -77,15 +77,6 @@ class PostManager extends RESTManager {
 		});
 	}
 
-	async delete(post, user) {
-		return await this.request(
-			`/api/v1/media/${post}_${String(user)}/delete/?media_type=TEXT_POST`,
-			{
-				method: "POST",
-			}
-		);
-	}
-
 	async quote(
 		user,
 		options = {
