@@ -21,12 +21,12 @@ declare module "@threadsjs/threads.js/src/managers/FeedManager.js" {
 declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export interface CreateOptions {
-		content: string;
+		contents: string;
 		data?: null | Object;
 	}
 
 	export interface ReplyOptions {
-		content: string;
+		contents: string;
 		post: string;
 	}
 
