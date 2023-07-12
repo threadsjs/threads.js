@@ -73,7 +73,7 @@ declare module "@threadsjs/threads.js" {
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 
 	export class Client extends EventEmitter {
-		public constructor(options: ClientOptions);
+		public constructor(options?: ClientOptions);
 
 		token: string;
 		userAgent: string;
