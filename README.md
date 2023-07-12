@@ -64,7 +64,7 @@ Pass the user id (supported as string and number) of the user you want to unsubs
 await client.users.unfollow(1)
 ```
 ### client.users.search
-Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30)
+Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30). The minimum is 30.
 ```js
 await client.users.search("zuck", 10)
 ```
