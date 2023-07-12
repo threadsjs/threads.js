@@ -27,7 +27,7 @@ function parseNestedJson(json) {
 
 function parseBloksResponse(text) {
 	const { tree } = JSON.parse(text).layout.bloks_payload;
-	const sanitized = JSON.parse(JSON.parse(Object.values(tree)[0]['#'].match(/\"\{.*\}\"/)[0]));
+	const sanitized = JSON.parse(JSON.parse(tree['㐟']['#'].match(/\"\{.*\}\"/)[0]));
 	const json = parseNestedJson(sanitized);
 
 	return json;

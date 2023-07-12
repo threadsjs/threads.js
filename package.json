@@ -11,6 +11,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@types/node": "^20.4.1",
-		"undici": "^5.22.1"
+		"undici": "^5.22.1",
+		"uuid": "^9.0.0"
 	}
 }

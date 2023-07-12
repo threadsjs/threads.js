@@ -5,6 +5,8 @@ const UserManager = require("./managers/UserManager");
 const PostManager = require("./managers/PostManager");
 const FeedManager = require("./managers/FeedManager");
 const { parseBloksResponse } = require("./util/Bloks.js");
+const crypto = require('crypto');
+const { v4: uuidv4 } = require('uuid');
 
 const androidId = (Math.random() * 1e24).toString(36);
 
@@ -17,6 +19,7 @@ class Client extends EventEmitter {
 		this.appId = appId || "238260118697367";
 		this.androidId = androidId;
 		this.userId = null;
+		this.base = "https://i.instagram.com";
 
 		this.rest = new RESTManager(this);
 
@@ -27,13 +30,66 @@ class Client extends EventEmitter {
 		this.feeds = new FeedManager(this);
 	}
 
+	async qeSync() {
+		const uuid = uuidv4();
+		const params = {
+			id: uuid
+		}
+
+		return await fetch(this.base + '/api/v1/qe/sync/', {
+			method: 'POST',
+			headers: {
+				"User-Agent": "Barcelona 289.0.0.77.109 Android",
+				"Sec-Fetch-Site": "same-origin",
+				"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+				'X-DEVICE-ID': uuid
+			},
+			body: `params=${encodeURIComponent(params)}`
+		}).then(res => {
+			return res
+		})
+	}
+
+	async encryptPassword(password) {
+		// https://github.com/dilame/instagram-private-api/blob/master/src/repositories/account.repository.ts#L79-L103
+		const key = crypto.randomBytes(32);
+		const iv = crypto.randomBytes(12);
+		let keyId;
+		let pubKey;
+		await this.qeSync().then(async res => {
+			const headers = res.headers;
+			keyId = headers.get('ig-set-password-encryption-key-id');
+			pubKey = headers.get('ig-set-password-encryption-pub-key');
+		});
+		const rsaEncrypted = crypto.publicEncrypt({
+			key: Buffer.from(pubKey, 'base64').toString(),
+			padding: crypto.constants.RSA_PKCS1_PADDING,
+		}, key);
+		const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+		const time = Math.floor(Date.now() / 1000).toString();
+		cipher.setAAD(Buffer.from(time));
+		const aesEncrypted = Buffer.concat([cipher.update(password, 'utf8'), cipher.final()]);
+		const sizeBuffer = Buffer.alloc(2, 0);
+		sizeBuffer.writeInt16LE(rsaEncrypted.byteLength, 0);
+		const authTag = cipher.getAuthTag();
+			return {
+			time,
+			password: Buffer.concat([
+				Buffer.from([1, keyId]),
+				iv,
+				sizeBuffer,
+				rsaEncrypted, authTag, aesEncrypted])
+				.toString('base64'),
+			};
+		}
+
 	async login(username, password) {
-		const base = "https://i.instagram.com";
 		const loginUrl = "/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/";
+		const encryptedPassword = await this.encryptPassword(password);
 
 		const params = {
 			client_input_params: {
-				password: password,
+				password: `#PWD_INSTAGRAM:4:${encryptedPassword.time}:${encryptedPassword.password}`,
 				contact_point: username,
 				device_id: `android-${androidId}`,
 			},
@@ -70,7 +126,7 @@ class Client extends EventEmitter {
 			)}&bloks_versioning_id=${requestBody.bloks_versioning_id}`,
 		};
 
-		const response = await fetch(base + loginUrl, requestOptions);
+		const response = await fetch(this.base + loginUrl, requestOptions);
 		const text = await response.text();
 		const bloks = parseBloksResponse(text);
 
@@ -100,7 +156,7 @@ class Client extends EventEmitter {
 							JSON.stringify([trusted_notification_polling_nonce]),
 					}).toString();
 
-					const response = await fetch(base + statusUrl, requestOptions);
+					const response = await fetch(this.base + statusUrl, requestOptions);
 					const json = await response.json();
 
 					if (json.review_status === 1) {
@@ -116,7 +172,7 @@ class Client extends EventEmitter {
 							})
 						}).toString()
 
-						const response = await fetch(base + verifyUrl, requestOptions);
+						const response = await fetch(this.base + verifyUrl, requestOptions);
 						const json = await response.json();
 						const header = response.headers.get('Ig-Set-Authorization');
 

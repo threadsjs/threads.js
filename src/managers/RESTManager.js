@@ -1,13 +1,12 @@
 const { fetch } = require('undici');
 
-const base = 'https://i.instagram.com'
-
 class RESTManager {
 	constructor(client) {
 		Object.defineProperty(this, 'client', { value: client });
 	}
 
 	async request(url, options) {
+		console.log(this.client)
 		if (!options) {
 			options = {};
 		};
@@ -23,7 +22,7 @@ class RESTManager {
 				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 			};
 		};
-		const res = await fetch(base + url, { ... options });
+		const res = await fetch(this.client.base + url, { ... options });
 		const contentType = res.headers.get('content-type');
 		if (contentType.includes('application/json')) {
 			return res.json();
