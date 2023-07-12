@@ -21,21 +21,21 @@ declare module "@threadsjs/threads.js/src/managers/FeedManager.js" {
 declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	export interface CreateOptions {
-		content: string;
+		contents: string;
 		data?: null | Object;
 	}
 
 	export interface ReplyOptions {
-		content: string;
+		contents: string;
 		post: string;
 	}
 
 	export default class PostManager extends RESTManager {
 		fetch(post: string, paging_token?: string) : Promise<any>;
 		likers(post: string, user: string | number) : Promise<any>;
-		create(contents: string, user: string | number) : Promise<any>;
-		reply(contents: string, user: string | number, post: string): Promise<any>;
-		quote(contents: string, user: string | number, post: string): Promise<any>;
+		create(contents: string, options: CreateOptions) : Promise<any>;
+		reply(user: string | number, options: ReplyOptions): Promise<any>;
+		quote(user: string | number, options: ReplyOptions): Promise<any>;
 		delete(post: string, user: string | number): Promise<any>;
 		like(post: string, user: string | number) : Promise<any>;
 		unlike(post: string, user: string | number) : Promise<any>;

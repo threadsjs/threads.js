@@ -77,17 +77,14 @@ class PostManager extends RESTManager {
 		});
 	}
 
-	async delete(post, user) {
-		return await this.request(
-			`/api/v1/media/${post}_${String(user)}/delete/?media_type=TEXT_POST`,
-			{
-				method: "POST",
-			}
-		);
-	}
-
-	async quote(contents, user, post) {
-		let text_post_app_info = JSON.stringify({"quoted_post_id": post, "reply_control": 0});
+	async quote(
+		user,
+		options = {
+			contents: "",
+			post: "",
+		}
+	) {
+		let text_post_app_info = JSON.stringify({"quoted_post_id": options.post, "reply_control": 0});
 
 		const requestBody = {
 			publish_mode: "text_post",
@@ -96,7 +93,7 @@ class PostManager extends RESTManager {
 			source_type: "4",
 			_uid: user,
 			device_id: `android-${this.client.androidId}`,
-			caption: contents,
+			caption: options.contents,
 			upload_id: new Date().getTime(),
 			device: {
 				manufacturer: "OnePlus",
