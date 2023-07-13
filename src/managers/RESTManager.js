@@ -6,7 +6,6 @@ class RESTManager {
 	}
 
 	async request(url, options) {
-		console.log(this.client)
 		if (!options) {
 			options = {};
 		};
