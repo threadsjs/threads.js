@@ -78,10 +78,20 @@ declare module "@threadsjs/threads.js/src/managers/RestrictionManager.js" {
 	}
 }
 
+declare module "@threadsjs/threads.js/src/managers/GraphQLManager.js" {
+	export default class GraphQLManager {
+		getLsd(): Promise<any>;
+		request(docId: string, variables: string): Promise<any>;
+		getUser(userId: string | number): Promise<any>;
+		getPost(postId: string | number): Promise<any>;
+	}
+}
+
 declare module "@threadsjs/threads.js" {
 	import { EventEmitter } from "node:events";
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
 	import FeedManager from "@threadsjs/threads.js/src/managers/FeedManager.js";
+	import GraphQLManager from "@threadsjs/threads.js/src/managers/GraphQLManager.js";
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
 	import FriendshipManager from "@threadsjs/threads.js/src/managers/FriendshipManager.js";
@@ -103,6 +113,7 @@ declare module "@threadsjs/threads.js" {
 		feeds: FeedManager;
 		friendships: FriendshipManager;
 		restrictions: RestrictionManager;
+		graphql: GraphQLManager;
 
 		public login(username: string, password: string): Promise<void>;
 	}
