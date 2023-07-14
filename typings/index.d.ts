@@ -1,3 +1,11 @@
+/**
+ * @file threads.js typings
+ * 
+ * Post IDs must be strings, not numbers. This is because JavaScript represents all numbers as IEEE 754
+ * floating point numbers, and as such cannot accurately represent integers greater than 2^53. This is
+ * a limitation of JavaScript, not threads.js.
+ */
+
 declare module "@threadsjs/threads.js/src/managers/RESTManager.js" {
 	import { Client } from "@threadsjs/threads.js";
 	export default class RESTManager {
@@ -83,7 +91,9 @@ declare module "@threadsjs/threads.js/src/managers/GraphQLManager.js" {
 		getLsd(): Promise<any>;
 		request(docId: string, variables: string): Promise<any>;
 		getUser(userId: string | number): Promise<any>;
-		getPost(postId: string | number): Promise<any>;
+		getUserPosts(userId: string | number): Promise<any>;
+		getPost(postId: string): Promise<any>;
+		getPostLikers(postId: string): Promise<any>;
 	}
 }
 
