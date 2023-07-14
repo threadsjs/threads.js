@@ -2,6 +2,7 @@ const EventEmitter = require("node:events");
 const { fetch } = require("undici");
 const FeedManager = require("./managers/FeedManager");
 const FriendshipManager = require("./managers/FriendshipManager");
+const GraphQLManager = require("./managers/GraphQLManager");
 const PostManager = require("./managers/PostManager");
 const RESTManager = require("./managers/RESTManager");
 const RestrictionManager = require("./managers/RestrictionManager");
@@ -34,6 +35,8 @@ class Client extends EventEmitter {
 		this.friendships = new FriendshipManager(this);
 
 		this.restrictions = new RestrictionManager(this);
+
+		this.graphql = new GraphQLManager(this);
 	}
 
 	async qeSync() {
