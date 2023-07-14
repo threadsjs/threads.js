@@ -48,65 +48,70 @@ In the parameters, pass the user id (supported as string and number) of the user
 ```js
 await client.users.fetch(1)
 ```
-### client.users.show
-In the parameters, pass the user id (supported as string and number) of the user whose friendship status information you want to get.
-```js
-await client.users.show(1)
-```
-### client.users.follow
-Pass the user id (supported as string and number) of the user you want to subscribe to in the parameters
-```js
-await client.users.follow(1)
-```
-### client.users.unfollow
-Pass the user id (supported as string and number) of the user you want to unsubscribe from in the parameters
-```js
-await client.users.unfollow(1)
-```
 ### client.users.search
 Pass the query as the first parameter, and the number of objects in the response as the second parameter (by default - 30). The minimum is 30.
 ```js
 await client.users.search("zuck", 10)
 ```
-### client.users.followers
-In the parameters, pass the user id (supported as string and number) of the user whose followers you want to get.
-```js
-await client.users.followers(1)
-```
-### client.users.following
-In the parameters, pass the user id (supported as string and number) of the user whose followings you want to get.
-```js
-await client.users.following(1)
-```
-### client.users.mute
-In the parameters, pass the user id (supported as string and number) of the user you want to mute.
-```js
-await client.users.mute(1)
-```
-### client.users.unmute
-In the parameters, pass the user id (supported as string and number) of the user you want to unmute.
-```js
-await client.users.unmute(1)
-```
-### client.users.restrict
+
+<br />
+
+### client.restrictions.restrict
 In the parameters, pass the user id (supported as string and number) of the user you want to restrict.
 ```js
 await client.users.restrict(1)
 ```
-### client.users.unrestrict
+### client.restrictions.unrestrict
 In the parameters, pass the user id (supported as string and number) of the user you want to unrestrict.
 ```js
 await client.users.unrestrict(1)
 ```
-### client.users.block
+<br />
+
+### client.friendships.show
+In the parameters, pass the user id (supported as string and number) of the user whose friendship status information you want to get.
+```js
+await client.friendships.show(1)
+```
+### client.friendships.follow
+Pass the user id (supported as string and number) of the user you want to subscribe to in the parameters
+```js
+await client.friendships.follow(1)
+```
+### client.friendships.unfollow
+Pass the user id (supported as string and number) of the user you want to unsubscribe from in the parameters
+```js
+await client.friendships.unfollow(1)
+```
+### client.friendships.followers
+In the parameters, pass the user id (supported as string and number) of the user whose followers you want to get.
+```js
+await client.friendships.followers(1)
+```
+### client.friendships.following
+In the parameters, pass the user id (supported as string and number) of the user whose followings you want to get.
+```js
+await client.friendships.following(1)
+```
+### client.friendships.mute
+In the parameters, pass the user id (supported as string and number) of the user you want to mute.
+```js
+await client.friendships.mute(1)
+```
+### client.friendships.unmute
+In the parameters, pass the user id (supported as string and number) of the user you want to unmute.
+```js
+await client.friendships.unmute(1)
+```
+### client.friendships.block
 In the parameters, pass the user id (supported as string and number) of the user you want to block.
 ```js
-await client.users.block(1)
+await client.friendships.block(1)
 ```
-### client.users.unblock
+### client.friendships.unblock
 In the parameters, pass the user id (supported as string and number) of the user you want to unblock.
 ```js
-await client.users.unblock(1)
+await client.friendships.unblock(1)
 ```
 
 <br />
