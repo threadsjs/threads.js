@@ -92,8 +92,8 @@ declare module "@threadsjs/threads.js/src/managers/GraphQLManager.js" {
 		request(docId: string, variables: string): Promise<any>;
 		getUser(userId: string | number): Promise<any>;
 		getUserPosts(userId: string | number): Promise<any>;
+		getUserReplies(userId: string | number): Promise<any>;
 		getPost(postId: string): Promise<any>;
-		getPostLikers(postId: string): Promise<any>;
 	}
 }
 
