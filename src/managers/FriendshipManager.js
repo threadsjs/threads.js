@@ -2,9 +2,7 @@ const RESTManager = require('./RESTManager');
 
 class UserManager extends RESTManager {
 	async show(user) {
-		return await this.request(`/api/v1/friendships/show/${String(user)}/`, {
-			method: 'POST',
-		});
+		return await this.request(`/api/v1/friendships/show/${String(user)}/`);
 	}
 
 	async follow(user) {
