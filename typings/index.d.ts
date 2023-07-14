@@ -47,21 +47,34 @@ declare module "@threadsjs/threads.js/src/managers/PostManager.js" {
 
 declare module "@threadsjs/threads.js/src/managers/UserManager.js" {
 	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
-	import { User, FriendshipStatus } from "@threadsjs/threads.js";
+	import { User } from "@threadsjs/threads.js";
 	export default class UserManager extends RESTManager {
 		fetch(user: string | number): Promise<User>;
+		search(query: string, count?: number | string): Promise<any>;
+	}
+}
+
+declare module "@threadsjs/threads.js/src/managers/FriendshipManager.js" {
+	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
+	import { FriendshipStatus } from "@threadsjs/threads.js";
+	export default class FriendshipManager extends RESTManager {
 		show(user: string | number): Promise<FriendshipStatus>;
 		follow(user: string | number): Promise<FriendshipStatus>;
 		unfollow(user: string | number): Promise<FriendshipStatus>;
-		search(query: string, count?: number | string): Promise<any>;
 		followers(user: string | number): Promise<any>;
 		following(user: string | number): Promise<any>;
 		mute(user: string | number): Promise<any>;
 		unmute(user: string | number): Promise<any>;
-		restrict(user: string | number): Promise<any>;
-		unrestrict(user: string | number): Promise<any>;
 		block(user: string | number): Promise<any>;
 		unblock(user: string | number): Promise<any>;
+	}
+}
+
+declare module "@threadsjs/threads.js/src/managers/RestrictionManager.js" {
+	import RESTManager from "@threadsjs/threads.js/src/managers/RESTManager.js";
+	export default class RestrictionManager extends RESTManager {
+		restrict(user: string | number): Promise<any>;
+		unrestrict(user: string | number): Promise<any>;
 	}
 }
 
@@ -71,6 +84,8 @@ declare module "@threadsjs/threads.js" {
 	import FeedManager from "@threadsjs/threads.js/src/managers/FeedManager.js";
 	import PostManager from "@threadsjs/threads.js/src/managers/PostManager.js";
 	import UserManager from "@threadsjs/threads.js/src/managers/UserManager.js";
+	import FriendshipManager from "@threadsjs/threads.js/src/managers/FriendshipManager.js";
+	import RestrictionManager from "@threadsjs/threads.js/src/managers/RestrictionManager.js";
 
 	export class Client extends EventEmitter {
 		public constructor(options?: ClientOptions);
@@ -86,6 +101,8 @@ declare module "@threadsjs/threads.js" {
 		users: UserManager;
 		posts: PostManager;
 		feeds: FeedManager;
+		friendships: FriendshipManager;
+		restrictions: RestrictionManager;
 
 		public login(username: string, password: string): Promise<void>;
 	}

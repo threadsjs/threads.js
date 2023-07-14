@@ -1,9 +1,11 @@
 const EventEmitter = require("node:events");
 const { fetch } = require("undici");
-const RESTManager = require("./managers/RESTManager");
-const UserManager = require("./managers/UserManager");
-const PostManager = require("./managers/PostManager");
 const FeedManager = require("./managers/FeedManager");
+const FriendshipManager = require("./managers/FriendshipManager");
+const PostManager = require("./managers/PostManager");
+const RESTManager = require("./managers/RESTManager");
+const RestrictionManager = require("./managers/RestrictionManager");
+const UserManager = require("./managers/UserManager");
 const { parseBloksResponse } = require("./util/Bloks.js");
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
@@ -28,6 +30,10 @@ class Client extends EventEmitter {
 		this.posts = new PostManager(this);
 
 		this.feeds = new FeedManager(this);
+
+		this.friendships = new FriendshipManager(this);
+
+		this.restrictions = new RestrictionManager(this);
 	}
 
 	async qeSync() {
