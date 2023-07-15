@@ -7,7 +7,7 @@ const docIDs = {
 	BarcelonaProfileRepliesTabQuery: '6480022495409040',
 }
 
-class RESTManager {
+class GraphQLManager {
 	async getLsd() {
 		return await fetch('https://www.threads.net/@instagram').then(async res => {
 			const text = await res.text();
