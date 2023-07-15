@@ -19,7 +19,7 @@ class Client extends EventEmitter {
 
 		this.token = token || null;
 		this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
-		this.appId = appId || "238260118697367";
+		this.appId = appId || "3419628305025917";
 		this.androidId = androidId;
 		this.userId = null;
 		this.base = "https://i.instagram.com";
