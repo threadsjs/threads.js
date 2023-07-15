@@ -1,34 +1,39 @@
 const { fetch } = require('undici');
 
-class RESTManager {
-	constructor(client) {
-		Object.defineProperty(this, 'client', { value: client });
-	}
+const docIDs = {
+	BarcelonaProfileRootQuery: '23996318473300828',
+	BarcelonaPostPageQuery: '6821609764538244',
+	BarcelonaProfileThreadsTabQuery: '6549913525047487',
+	BarcelonaProfileRepliesTabQuery: '6480022495409040',
+}
 
+class GraphQLManager {
 	async getLsd() {
 		return await fetch('https://www.threads.net/@instagram').then(async res => {
 			const text = await res.text();
-			const pos = text.search('\'token\'');
-			const lsd = text.substring(pos + 9, pos + 31);
-			return lsd
+			const matches = text.match(/\["LSD",\[\],{"token":"([^"]*)"}/);
+			return matches[1];
 		})
 	}
 
 	async request(docId, variables) {
-		const lsd = await this.getLsd();
+		if (this.lsd === undefined) {
+			this.lsd = await this.getLsd();
+		}
+		
 		let request = {};
 		request.headers = {
+			'User-Agent': 'threads-client',
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'X-IG-App-ID': '238260118697367',
-			'X-FB-LSD': lsd,
+			'X-FB-LSD': this.lsd,
 			'Sec-Fetch-Site': 'same-origin',
 		};
-		request.body = `lsd=${lsd}&doc_id=${docId}&variables=${variables}`;
+		request.body = `lsd=${this.lsd}&doc_id=${docId}&variables=${encodeURIComponent(JSON.stringify(variables))}`;
 		request.credentials = 'omit';
 		request.method = 'POST';
 		const res = await fetch('https://www.threads.net/api/graphql', { ... request });
 		const contentType = res.headers.get('content-type');
-		console.log(contentType)
 		if (contentType.includes('text/javascript')) {
 			return res.json();
 		}
@@ -36,11 +41,19 @@ class RESTManager {
 	}
 
 	async getUser(userId) {
-		return await this.request('23996318473300828', `{"userID":"${String(userId)}"}`);
+		return await this.request(docIDs.BarcelonaProfileRootQuery, {userID: String(userId)});
+	}
+
+	async getUserPosts(userId) {
+		return await this.request(docIDs.BarcelonaProfileThreadsTabQuery, {userID: String(userId)});
+	}
+
+	async getUserReplies(userId) {
+		return await this.request(docIDs.BarcelonaProfileRepliesTabQuery, {userID: String(userId)});
 	}
 
 	async getPost(postId) {
-		return await this.request('6254373924615707', `{"postID":"${String(postId)}"}`);
+		return await this.request(docIDs.BarcelonaPostPageQuery, {postID: String(postId)});
 	}
 }
 
