@@ -57,4 +57,4 @@ class GraphQLManager {
 	}
 }
 
-module.exports = RESTManager;
+module.exports = GraphQLManager;

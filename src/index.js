@@ -1,4 +1,3 @@
-const EventEmitter = require("node:events");
 const { fetch } = require("undici");
 const FeedManager = require("./managers/FeedManager");
 const FriendshipManager = require("./managers/FriendshipManager");
@@ -13,16 +12,15 @@ const { v4: uuidv4 } = require('uuid');
 
 const androidId = (Math.random() * 1e24).toString(36);
 
-class Client extends EventEmitter {
-	constructor({ token, userAgent, appId }) {
-		super({ captureRejections: true });
-
-		this.token = token || null;
-		this.userAgent = userAgent || "Barcelona 289.0.0.77.109 Android";
-		this.appId = appId || "3419628305025917";
-		this.androidId = androidId;
-		this.userId = null;
-		this.base = "https://i.instagram.com";
+class Client {
+	constructor(options) {
+		this.options = {}
+		this.options.token = options ? options.token : null;
+		this.options.userAgent = options ? options.userAgent : "Barcelona 289.0.0.77.109 Android";
+		this.options.appId = options ? options.appId : "3419628305025917";
+		this.options.androidId = options ? options.androidId : androidId;
+		this.options.userId = null;
+		this.options.base = "https://i.instagram.com";
 
 		this.rest = new RESTManager(this);
 
@@ -39,13 +37,13 @@ class Client extends EventEmitter {
 		this.graphql = new GraphQLManager(this);
 	}
 
-	async qeSync() {
+	async _qeSync() {
 		const uuid = uuidv4();
 		const params = {
 			id: uuid
 		}
 
-		return await fetch(this.base + '/api/v1/qe/sync/', {
+		return await fetch(this.options.base + '/api/v1/qe/sync/', {
 			method: 'POST',
 			headers: {
 				"User-Agent": "Barcelona 289.0.0.77.109 Android",
@@ -59,13 +57,13 @@ class Client extends EventEmitter {
 		})
 	}
 
-	async encryptPassword(password) {
+	async _encryptPassword(password) {
 		// https://github.com/dilame/instagram-private-api/blob/master/src/repositories/account.repository.ts#L79-L103
 		const key = crypto.randomBytes(32);
 		const iv = crypto.randomBytes(12);
 		let keyId;
 		let pubKey;
-		await this.qeSync().then(async res => {
+		await this._qeSync().then(async res => {
 			const headers = res.headers;
 			keyId = headers.get('ig-set-password-encryption-key-id');
 			pubKey = headers.get('ig-set-password-encryption-pub-key');
@@ -82,19 +80,19 @@ class Client extends EventEmitter {
 		sizeBuffer.writeInt16LE(rsaEncrypted.byteLength, 0);
 		const authTag = cipher.getAuthTag();
 			return {
-			time,
-			password: Buffer.concat([
-				Buffer.from([1, keyId]),
-				iv,
-				sizeBuffer,
-				rsaEncrypted, authTag, aesEncrypted])
-				.toString('base64'),
+				time,
+				password: Buffer.concat([
+					Buffer.from([1, keyId]),
+					iv,
+					sizeBuffer,
+					rsaEncrypted, authTag, aesEncrypted])
+					.toString('base64'),
 			};
 		}
 
 	async login(username, password) {
 		const loginUrl = "/api/v1/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/";
-		const encryptedPassword = await this.encryptPassword(password);
+		const encryptedPassword = await this._encryptPassword(password);
 
 		const params = {
 			client_input_params: {
@@ -135,7 +133,7 @@ class Client extends EventEmitter {
 			)}&bloks_versioning_id=${requestBody.bloks_versioning_id}`,
 		};
 
-		const response = await fetch(this.base + loginUrl, requestOptions);
+		const response = await fetch(this.options.base + loginUrl, requestOptions);
 		const text = await response.text();
 		const bloks = parseBloksResponse(text);
 
@@ -165,7 +163,7 @@ class Client extends EventEmitter {
 							JSON.stringify([trusted_notification_polling_nonce]),
 					}).toString();
 
-					const response = await fetch(self.base + statusUrl, requestOptions);
+					const response = await fetch(self.options.base + statusUrl, requestOptions);
 					const json = await response.json();
 
 					if (json.review_status === 1) {
@@ -181,12 +179,12 @@ class Client extends EventEmitter {
 							})
 						}).toString()
 
-						const response = await fetch(self.base + verifyUrl, requestOptions);
+						const response = await fetch(self.options.base + verifyUrl, requestOptions);
 						const json = await response.json();
 						const header = response.headers.get('Ig-Set-Authorization');
 
 						if (json.logged_in_user.pk_id) {
-							self.userId = json.logged_in_user.pk_id;
+							self.options.userId = json.logged_in_user.pk_id;
 						}
 
 						clearInterval(interval);
@@ -197,7 +195,7 @@ class Client extends EventEmitter {
 				}, 2_500);
 			});
 
-			this.token = token;
+			this.options.token = token;
 			return;
 		}
 
@@ -205,7 +203,7 @@ class Client extends EventEmitter {
 			this.userId = bloks.login_response.logged_in_user.pk_id;
 		}
 
-		this.token = bloks.headers?.["IG-Set-Authorization"].replace("Bearer IGT:2:", "");
+		this.options.token = bloks.headers?.["IG-Set-Authorization"].replace("Bearer IGT:2:", "");
 	}
 }
 
