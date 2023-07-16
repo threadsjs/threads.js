@@ -20,7 +20,7 @@ class Client {
 		this.options.appId = options ? options.appId : "3419628305025917";
 		this.options.androidId = options ? options.androidId : androidId;
 		this.options.userId = null;
-		this.options.base = "https://i.instagram.com";
+		this.options.base = options ? options.base : "https://i.instagram.com";
 
 		this.rest = new RESTManager(this);
 
