@@ -1,12 +1,12 @@
 const RESTManager = require('./RESTManager');
 
 class UserManager extends RESTManager {
-	async fetch(user) {
-		return await this.request(`/api/v1/users/${String(user)}/info`);
+	async get(id) {
+		return await this.request(`/${id ? id : 'me'}?fields=id,username,threads_profile_picture_url,threads_biography`);
 	}
 
-	async search(query, count) {
-		return await this.request(`/api/v1/users/search/?q=${query}&count=${count ?? 30}`);
+	async limit(id) {
+		return await this.request(`/${id ? id : 'me'}/threads_publishing_limit?fields=quota_usage,config`);
 	}
 }
 
