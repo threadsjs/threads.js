@@ -7,7 +7,8 @@ class Client {
 	constructor(options) {
 		this.options = {}
 		this.options.token = options ? options.token : null;
-		this.options.base = options ? options.base : "https://graph.instagram.com";
+		this.options.secret = options ? options.secret : null;
+		this.options.base = options ? options.base : "https://graph.threads.net";
 
 		this.rest = new RESTManager(this);
 
@@ -16,8 +17,12 @@ class Client {
 		this.posts = new PostManager(this);
 	}
 
-	async login(token) {
-		// TODO: implement Instagram API login
+	async refresh_token(token) {
+		return await this.request(`/access_token/refresh_access_token?grant_type=th_refresh_token&access_token=${token}`);
+	}
+
+	async getToken(secret, token) {
+		const request = await this.request(`/access_token?grant_type=th_exchange_token&client_secret=${secret}&access_token=${token}`)
 	}
 }
 

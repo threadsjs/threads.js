@@ -9,6 +9,9 @@ class RESTManager {
 		if (!options) {
 			options = {};
 		};
+		if (!this.client.options.token) {
+			throw Error('Token required');
+		};
 		options.method = options?.method ?? 'GET';
 		const res = await fetch(`${this.client.options.base}${url}&access-token=${this.client.options.token}`, { ... options });
 		const contentType = res.headers.get('content-type');
