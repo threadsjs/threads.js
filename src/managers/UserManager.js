@@ -6,7 +6,7 @@ class UserManager extends RESTManager {
 	}
 
 	async limit(id) {
-		return await this.request(`/${id ? id : 'me'}/threads_publishing_limit?fields=quota_usage,config`);
+		return await this.request(`/v1.0/${id ? id : 'me'}/threads_publishing_limit?fields=quota_usage,config`);
 	}
 }
 

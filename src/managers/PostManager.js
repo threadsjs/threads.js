@@ -1,6 +1,10 @@
 const RESTManager = require('./RESTManager');
 
 class PostManager extends RESTManager {
+	async get(id) {
+		return await this.request(`/v1.0/${id}?fields=id,username,media_product_type,media_type,media_url,permalink,owner,username,text,timestamp,shortcude,thumbnail_url,children,is_quote_post`);
+	}
+
 	async post(options) {
 		let container;
         if (typeof(options) === 'string') {
