@@ -18,11 +18,12 @@ class Client {
 	}
 
 	async refresh_token(token) {
-		return await this.request(`/access_token/refresh_access_token?grant_type=th_refresh_token&access_token=${token}`);
+		return await this.rest.request(`/access_token/refresh_access_token?grant_type=th_refresh_token&access_token=${token}`);
 	}
 
 	async getToken(secret, token) {
-		const request = await this.request(`/access_token?grant_type=th_exchange_token&client_secret=${secret}&access_token=${token}`)
+		const request = await this.rest.request(`/access_token?grant_type=th_exchange_token&client_secret=${secret}&access_token=${token}`);
+		this.token = request.access_token;
 	}
 }
 
